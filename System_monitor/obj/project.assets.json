@@ -1,0 +1,369 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-windows7.0": {
+      "NvAPIWrapper.Net/0.8.1.101": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NvAPIWrapper.NetStandard/1.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {}
+        }
+      },
+      "OxyPlot.Core/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/OxyPlot.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/OxyPlot.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "OxyPlot.Wpf/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "OxyPlot.Core": "2.2.0",
+          "OxyPlot.Wpf.Shared": "2.2.0"
+        },
+        "compile": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "OxyPlot.Wpf.Shared/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "OxyPlot.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.Shared.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.Shared.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "System.CodeDom/9.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "System.Management/9.0.2": {
+        "type": "package",
+        "dependencies": {
+          "System.CodeDom": "9.0.2"
+        },
+        "compile": {
+          "lib/net8.0/System.Management.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Management.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Management.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NvAPIWrapper.Net/0.8.1.101": {
+      "sha512": "qX+5EQ32tCTqBkX/9BNfx7w4HPi18s3XhMubjbxSjPhYQ6pXWL+HGnaZEmGvFlOxvsQN+/6eV3x5bRo1CDY/mQ==",
+      "type": "package",
+      "path": "nvapiwrapper.net/0.8.1.101",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net45/NvAPIWrapper.dll",
+        "lib/net45/NvAPIWrapper.xml",
+        "lib/netstandard2.0/NvAPIWrapper.dll",
+        "lib/netstandard2.0/NvAPIWrapper.xml",
+        "nvapiwrapper.net.0.8.1.101.nupkg.sha512",
+        "nvapiwrapper.net.nuspec",
+        "readme.txt"
+      ]
+    },
+    "NvAPIWrapper.NetStandard/1.0.5": {
+      "sha512": "VzmKHgKEeB4rfZUvLK7RN0qP2BFNwR+1LzIOEJqcC5/aX8IB8//n/sp1+7nZWsozmCpjJKJC1Tzt1pceVaSuhg==",
+      "type": "package",
+      "path": "nvapiwrapper.netstandard/1.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NvAPIWrapper.dll",
+        "nvapiwrapper.netstandard.1.0.5.nupkg.sha512",
+        "nvapiwrapper.netstandard.nuspec"
+      ]
+    },
+    "OxyPlot.Core/2.2.0": {
+      "sha512": "QhXNdXR5FPpro/VoLx3BOp6AhQo7YrbfmWEZ9cgY+pnYM7RYORZjnu+aDMA8ka9A1r8hLkX//NbCPZNUv+l8qA==",
+      "type": "package",
+      "path": "oxyplot.core/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "README.md",
+        "lib/net462/OxyPlot.dll",
+        "lib/net462/OxyPlot.xml",
+        "lib/net6.0/OxyPlot.dll",
+        "lib/net6.0/OxyPlot.xml",
+        "lib/net8.0/OxyPlot.dll",
+        "lib/net8.0/OxyPlot.xml",
+        "lib/netstandard2.0/OxyPlot.dll",
+        "lib/netstandard2.0/OxyPlot.xml",
+        "oxyplot.core.2.2.0.nupkg.sha512",
+        "oxyplot.core.nuspec"
+      ]
+    },
+    "OxyPlot.Wpf/2.2.0": {
+      "sha512": "69KzgsMWpJSZmeXZt07FwfV7B1D4CM1nl0MWMj4wjrCsb3USBMo32up1+fQIjxp5tHCPdGwX9VWhSxW8nsY7pQ==",
+      "type": "package",
+      "path": "oxyplot.wpf/2.2.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "README.md",
+        "lib/net462/OxyPlot.Wpf.dll",
+        "lib/net462/OxyPlot.Wpf.xml",
+        "lib/net6.0-windows7.0/OxyPlot.Wpf.dll",
+        "lib/net6.0-windows7.0/OxyPlot.Wpf.xml",
+        "lib/net8.0-windows7.0/OxyPlot.Wpf.dll",
+        "lib/net8.0-windows7.0/OxyPlot.Wpf.xml",
+        "oxyplot.wpf.2.2.0.nupkg.sha512",
+        "oxyplot.wpf.nuspec",
+        "tools/VisualStudioToolsManifest.xml"
+      ]
+    },
+    "OxyPlot.Wpf.Shared/2.2.0": {
+      "sha512": "JoOD/feTOlKFmgXqeTNrl4Ze0i0L6WizPapNw9pXwot+cnI0qhFgYv3tFjlSdu51hZw0EgmcgeRXMtm5bkueYA==",
+      "type": "package",
+      "path": "oxyplot.wpf.shared/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "OxyPlot_128.png",
+        "README.md",
+        "lib/net462/OxyPlot.Wpf.Shared.dll",
+        "lib/net462/OxyPlot.Wpf.Shared.xml",
+        "lib/net6.0-windows7.0/OxyPlot.Wpf.Shared.dll",
+        "lib/net6.0-windows7.0/OxyPlot.Wpf.Shared.xml",
+        "lib/net8.0-windows7.0/OxyPlot.Wpf.Shared.dll",
+        "lib/net8.0-windows7.0/OxyPlot.Wpf.Shared.xml",
+        "oxyplot.wpf.shared.2.2.0.nupkg.sha512",
+        "oxyplot.wpf.shared.nuspec"
+      ]
+    },
+    "System.CodeDom/9.0.2": {
+      "sha512": "VnlzS7afE8LaXXwKdHOe2D6FcDekqThzU1E67CONV7gp71q3zposqcSeXH+PxARMXC5j31efwXrxP8VGvD70Ug==",
+      "type": "package",
+      "path": "system.codedom/9.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.CodeDom.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.CodeDom.targets",
+        "lib/net462/System.CodeDom.dll",
+        "lib/net462/System.CodeDom.xml",
+        "lib/net8.0/System.CodeDom.dll",
+        "lib/net8.0/System.CodeDom.xml",
+        "lib/net9.0/System.CodeDom.dll",
+        "lib/net9.0/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.9.0.2.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Management/9.0.2": {
+      "sha512": "U6SXFe1kfJySAvcPPdbdb+fycaY+3c/KV0PwTjurvrALMnlSm37s5z8zcoI7qbkV2kYhxiLfsZRGiF0XeSsqSQ==",
+      "type": "package",
+      "path": "system.management/9.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Management.targets",
+        "lib/net462/_._",
+        "lib/net8.0/System.Management.dll",
+        "lib/net8.0/System.Management.xml",
+        "lib/net9.0/System.Management.dll",
+        "lib/net9.0/System.Management.xml",
+        "lib/netstandard2.0/System.Management.dll",
+        "lib/netstandard2.0/System.Management.xml",
+        "runtimes/win/lib/net8.0/System.Management.dll",
+        "runtimes/win/lib/net8.0/System.Management.xml",
+        "runtimes/win/lib/net9.0/System.Management.dll",
+        "runtimes/win/lib/net9.0/System.Management.xml",
+        "system.management.9.0.2.nupkg.sha512",
+        "system.management.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0-windows7.0": [
+      "NvAPIWrapper.Net >= 0.8.1.101",
+      "NvAPIWrapper.NetStandard >= 1.0.5",
+      "OxyPlot.WPF >= 2.2.0",
+      "System.Management >= 9.0.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\barte\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+      "projectName": "System_monitor",
+      "projectPath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+      "packagesPath": "C:\\Users\\barte\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\barte\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
+    },
+    "frameworks": {
+      "net8.0-windows7.0": {
+        "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "NvAPIWrapper.Net": {
+            "target": "Package",
+            "version": "[0.8.1.101, )"
+          },
+          "NvAPIWrapper.NetStandard": {
+            "target": "Package",
+            "version": "[1.0.5, )"
+          },
+          "OxyPlot.WPF": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "System.Management": {
+            "target": "Package",
+            "version": "[9.0.2, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

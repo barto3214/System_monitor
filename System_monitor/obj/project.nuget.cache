@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "UpJBS7UoPPw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\barte\\.nuget\\packages\\nvapiwrapper.net\\0.8.1.101\\nvapiwrapper.net.0.8.1.101.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\nvapiwrapper.netstandard\\1.0.5\\nvapiwrapper.netstandard.1.0.5.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\oxyplot.core\\2.2.0\\oxyplot.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\oxyplot.wpf\\2.2.0\\oxyplot.wpf.2.2.0.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\oxyplot.wpf.shared\\2.2.0\\oxyplot.wpf.shared.2.2.0.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\system.codedom\\9.0.2\\system.codedom.9.0.2.nupkg.sha512",
+    "C:\\Users\\barte\\.nuget\\packages\\system.management\\9.0.2\\system.management.9.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,136 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "NvAPIWrapper.Net/0.8.1.101": {
+        "runtime": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {
+            "assemblyVersion": "0.8.1.100",
+            "fileVersion": "0.8.1.100"
+          }
+        }
+      },
+      "NvAPIWrapper.NetStandard/1.0.5": {
+        "runtime": {
+          "lib/netstandard2.0/NvAPIWrapper.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OxyPlot.Core/2.2.0": {
+        "runtime": {
+          "lib/net8.0/OxyPlot.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "OxyPlot.Wpf/2.2.0": {
+        "dependencies": {
+          "OxyPlot.Core": "2.2.0",
+          "OxyPlot.Wpf.Shared": "2.2.0"
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "OxyPlot.Wpf.Shared/2.2.0": {
+        "dependencies": {
+          "OxyPlot.Core": "2.2.0"
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/OxyPlot.Wpf.Shared.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
+          }
+        }
+      },
+      "System.CodeDom/9.0.2": {
+        "runtime": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.225.6610"
+          }
+        }
+      },
+      "System.Management/9.0.2": {
+        "dependencies": {
+          "System.CodeDom": "9.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/System.Management.dll": {
+            "assemblyVersion": "9.0.0.2",
+            "fileVersion": "9.0.225.6610"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Management.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "9.0.0.2",
+            "fileVersion": "9.0.225.6610"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NvAPIWrapper.Net/0.8.1.101": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qX+5EQ32tCTqBkX/9BNfx7w4HPi18s3XhMubjbxSjPhYQ6pXWL+HGnaZEmGvFlOxvsQN+/6eV3x5bRo1CDY/mQ==",
+      "path": "nvapiwrapper.net/0.8.1.101",
+      "hashPath": "nvapiwrapper.net.0.8.1.101.nupkg.sha512"
+    },
+    "NvAPIWrapper.NetStandard/1.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VzmKHgKEeB4rfZUvLK7RN0qP2BFNwR+1LzIOEJqcC5/aX8IB8//n/sp1+7nZWsozmCpjJKJC1Tzt1pceVaSuhg==",
+      "path": "nvapiwrapper.netstandard/1.0.5",
+      "hashPath": "nvapiwrapper.netstandard.1.0.5.nupkg.sha512"
+    },
+    "OxyPlot.Core/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QhXNdXR5FPpro/VoLx3BOp6AhQo7YrbfmWEZ9cgY+pnYM7RYORZjnu+aDMA8ka9A1r8hLkX//NbCPZNUv+l8qA==",
+      "path": "oxyplot.core/2.2.0",
+      "hashPath": "oxyplot.core.2.2.0.nupkg.sha512"
+    },
+    "OxyPlot.Wpf/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-69KzgsMWpJSZmeXZt07FwfV7B1D4CM1nl0MWMj4wjrCsb3USBMo32up1+fQIjxp5tHCPdGwX9VWhSxW8nsY7pQ==",
+      "path": "oxyplot.wpf/2.2.0",
+      "hashPath": "oxyplot.wpf.2.2.0.nupkg.sha512"
+    },
+    "OxyPlot.Wpf.Shared/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JoOD/feTOlKFmgXqeTNrl4Ze0i0L6WizPapNw9pXwot+cnI0qhFgYv3tFjlSdu51hZw0EgmcgeRXMtm5bkueYA==",
+      "path": "oxyplot.wpf.shared/2.2.0",
+      "hashPath": "oxyplot.wpf.shared.2.2.0.nupkg.sha512"
+    },
+    "System.CodeDom/9.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VnlzS7afE8LaXXwKdHOe2D6FcDekqThzU1E67CONV7gp71q3zposqcSeXH+PxARMXC5j31efwXrxP8VGvD70Ug==",
+      "path": "system.codedom/9.0.2",
+      "hashPath": "system.codedom.9.0.2.nupkg.sha512"
+    },
+    "System.Management/9.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U6SXFe1kfJySAvcPPdbdb+fycaY+3c/KV0PwTjurvrALMnlSm37s5z8zcoI7qbkV2kYhxiLfsZRGiF0XeSsqSQ==",
+      "path": "system.management/9.0.2",
+      "hashPath": "system.management.9.0.2.nupkg.sha512"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="SystemMonitor.MainWindow"
+        Title="System Monitor" Height="350" Width="600">
+    <TabControl>
+        <TabItem Header="Total">
+            <StackPanel Margin="10">
+                <TextBlock Text="Total" FontSize="25" FontWeight="Bold"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="CPU:" FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"></Label>
+                    <ProgressBar x:Name="CPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="CPU_usagetext" Width="50" Text="0%"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"/>
+                    <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"/>
+                    <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"/>
+                    <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="GPU_usagetext"  Text="0%"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"/>                                                         <!-- tu dokończyć chce zrobić
+                    odbierane i wysyłane, robiłem jakiś wykres ale trzebabybyło tu się z tym pobawić(zrób coś tu)-->
+                    <TextBlock x:Name="web_usagetext"  Text="0%"/>
+                </StackPanel>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="Processor"/>
+    </TabControl>
+
+
+</Window>
