@@ -1,0 +1,11 @@
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.csproj.AssemblyReference.cache
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor_MarkupCompile.cache
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.g.resources
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.AssemblyInfoInputs.cache
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.AssemblyInfo.cs
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.csproj.CoreCompileInputs.cache
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\netcoreapp3.1\System_monitor.sourcelink.json

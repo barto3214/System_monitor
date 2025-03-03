@@ -9,43 +9,99 @@
             <StackPanel Margin="10">
                 <TextBlock Text="Total" FontSize="25" FontWeight="Bold"/>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="CPU:" FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"></Label>
                     <ProgressBar x:Name="CPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="CPU_usagetext" Width="50" Text="0%"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>
                     <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%"/>
                 </StackPanel>
                 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>
                     <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%"/>
                 </StackPanel>
                 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>
                     <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="GPU_usagetext"  Text="0%"/>
                 </StackPanel>
                 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>                                                         <!-- tu dokończyć chce zrobić
                     odbierane i wysyłane, robiłem jakiś wykres ale trzebabybyło tu się z tym pobawić(zrób coś tu)-->
-                    <TextBlock x:Name="web_usagetext"  Text="0%"/>
+                    <StackPanel>
+                        <TextBlock x:Name="web_sendedtext" Text="0" HorizontalAlignment="Center"/>
+                        <TextBlock>Wysyłane pakiety</TextBlock>
+                    </StackPanel>
+                    <Label/>
+                    <StackPanel>
+                        <TextBlock x:Name="web_recivedtext" Text="0" HorizontalAlignment="Center"/>
+                        <TextBlock>Odbierane pakiety</TextBlock>
+                    </StackPanel>
+                    
                 </StackPanel>
+                <Label/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" Click="DNS_Click">Optymalizacja cache DNS(internet)</Button>
+                    <Button Grid.Column="1" Grid.Row="0" Click="Deleting_Click">Usunięcie plików tymczasowych</Button>
+                    <Button Grid.Column="0" Grid.Row="1" Click="Trash_Click">Usunięcie plików z kosza</Button>
+                    <Button Grid.Column="1" Grid.Row="1" Click="TEMP_delete_Click">Czyszczenie folderu tymczasowego %TEMP%</Button>
+                    <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Click="RAM_Click">Zwolnienie nieużywanej pamięci RAM</Button>
+                    
+                    
+                </Grid>
+
+
             </StackPanel>
         </TabItem>
-        <TabItem Header="Processor"/>
+        <TabItem Header="Processor" RenderTransformOrigin="4.807,14.428">
+            <StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora</TextBlock>
+                <TextBlock HorizontalAlignment="Center" x:Name="name_proc"></TextBlock>
+                <Label/>
+                <TextBlock HorizontalAlignment="Center" x:Name="usage_proc"></TextBlock>
+                <Label/>
+                <UniformGrid>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Czas pracy CPU: </TextBlock>
+                        <TextBlock x:Name="time_cpu" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold">Liczba rdzeni: </TextBlock>
+                        <TextBlock x:Name="cores_of_cpu" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold">Liczba wątków: </TextBlock>
+                        <TextBlock x:Name="ammount_of_threats" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Prędkość procesora:</TextBlock>
+                        <TextBlock x:Name="speed_of_cpu" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold">Liczba przerwań na sekundę:</TextBlock>
+                        <TextBlock x:Name="proc_temp" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold">Liczba procesów:</TextBlock>
+                        <TextBlock x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </UniformGrid>
+            </StackPanel>
+        </TabItem>
     </TabControl>
 
 
