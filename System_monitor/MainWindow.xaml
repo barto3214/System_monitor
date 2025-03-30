@@ -17,28 +17,29 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold"/>
+                    <Label Width="20"/>
+                    <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="GPU_usagetext"  Text="0%"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>
                     <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%"/>
                 </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold"/>
                     <Label Width="20"/>
                     <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
                     <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%"/>
                 </StackPanel>
-                
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold"/>
-                    <Label Width="20"/>
-                    <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
-                    <TextBlock x:Name="GPU_usagetext"  Text="0%"/>
-                </StackPanel>
-                
+
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="" FontSize="14" FontWeight="Bold" x:Name="typ_sieci"/>
                     <Label Width="20"/>                                                         <!-- tu dokończyć chce zrobić
                     odbierane i wysyłane, robiłem jakiś wykres ale trzebabybyło tu się z tym pobawić(zrób coś tu)-->
                     <StackPanel>
@@ -92,12 +93,42 @@
                         <TextBlock x:Name="ammount_of_threats" HorizontalAlignment="Center"></TextBlock>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold">Prędkość procesora:</TextBlock>
+                        <TextBlock FontWeight="Bold">Szacowana prędkość procesora:</TextBlock>
                         <TextBlock x:Name="speed_of_cpu" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock FontWeight="Bold">Liczba przerwań na sekundę:</TextBlock>
                         <TextBlock x:Name="proc_temp" HorizontalAlignment="Center"></TextBlock>
                         <TextBlock FontWeight="Bold">Liczba procesów:</TextBlock>
                         <TextBlock x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </UniformGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Header="GPU">
+            <StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora graficznego</TextBlock>
+                <TextBlock x:Name="GPU_name" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock x:Name="usage_GPU" HorizontalAlignment="Center"></TextBlock>
+                <Label/>
+                <Label/>
+                <Label/>
+                <Label/>
+                <Label/>
+                <UniformGrid>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Wersja zainstalowanego sterownika:</TextBlock>
+                        <TextBlock x:Name="GPU_driver_version" HorizontalAlignment="Center"></TextBlock>
+                        <Label/>
+                        <TextBlock FontWeight="Bold">Pamięć wbudowana:</TextBlock>
+                        <TextBlock x:Name="GPU_memory_available" HorizontalAlignment="Center"></TextBlock>
+                        <Label/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Temperatura GPU:</TextBlock>
+                        <TextBlock x:Name="GPU_temp" HorizontalAlignment="Center"></TextBlock>
+                        <Label/>
+                        <TextBlock FontWeight="Bold">Status urządzenia:</TextBlock>
+                        <TextBlock x:Name="GPU_status" HorizontalAlignment="Center"></TextBlock>
+                        <Label/>
                     </StackPanel>
                 </UniformGrid>
             </StackPanel>
