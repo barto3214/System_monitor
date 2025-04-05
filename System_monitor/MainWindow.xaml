@@ -3,53 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="SystemMonitor.MainWindow"
-        Title="System Monitor" Height="350" Width="600">
-    <TabControl>
-        <TabItem Header="Total">
+        Title="System Monitor" Height="400" Width="600" Background="{DynamicResource BackgroundBrush}">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <TabControl Background="{StaticResource BackgroundBrush}">
+        <TabItem  Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="Ogólnie">
             <StackPanel Margin="10">
                 <TextBlock Text="Total" FontSize="25" FontWeight="Bold"/>
 
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="CPU:" FontSize="14" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" Margin="5" >
+                    <TextBlock Text="CPU:" FontSize="14" FontWeight="Bold" />
                     <Label Width="20"></Label>
-                    <ProgressBar x:Name="CPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
-                    <TextBlock x:Name="CPU_usagetext" Width="50" Text="0%"/>
+                    <ProgressBar x:Name="CPU_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}" />
+                    <TextBlock x:Name="CPU_usagetext" Width="50" Text="0%" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
-                    <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
-                    <TextBlock x:Name="GPU_usagetext"  Text="0%"/>
+                    <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
+                    <TextBlock x:Name="GPU_usagetext"  Text="0%" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
-                    <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
-                    <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%"/>
+                    <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
+                    <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
-                    <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100"/>
-                    <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%"/>
+                    <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
+                    <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold"/>
-                    <TextBlock Text="" FontSize="14" FontWeight="Bold" x:Name="typ_sieci"/>
+                    <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold" />
+                    <TextBlock Text="" FontSize="14" FontWeight="Bold" x:Name="typ_sieci" />
                     <Label Width="20"/>                                                         <!-- tu dokończyć chce zrobić
                     odbierane i wysyłane, robiłem jakiś wykres ale trzebabybyło tu się z tym pobawić(zrób coś tu)-->
                     <StackPanel>
-                        <TextBlock x:Name="web_sendedtext" Text="0" HorizontalAlignment="Center"/>
-                        <TextBlock>Wysyłane pakiety</TextBlock>
+                        <TextBlock x:Name="web_sendedtext" Text="0" HorizontalAlignment="Center" />
+                        <TextBlock >Wysyłane pakiety</TextBlock>
                     </StackPanel>
                     <Label/>
                     <StackPanel>
-                        <TextBlock x:Name="web_recivedtext" Text="0" HorizontalAlignment="Center"/>
-                        <TextBlock>Odbierane pakiety</TextBlock>
+                        <TextBlock x:Name="web_recivedtext" Text="0" HorizontalAlignment="Center" />
+                        <TextBlock >Odbierane pakiety</TextBlock>
                     </StackPanel>
                     
                 </StackPanel>
@@ -64,11 +73,11 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Column="0" Grid.Row="0" Click="DNS_Click">Optymalizacja cache DNS(internet)</Button>
-                    <Button Grid.Column="1" Grid.Row="0" Click="Deleting_Click">Usunięcie plików tymczasowych</Button>
-                    <Button Grid.Column="0" Grid.Row="1" Click="Trash_Click">Usunięcie plików z kosza</Button>
-                    <Button Grid.Column="1" Grid.Row="1" Click="TEMP_delete_Click">Czyszczenie folderu tymczasowego %TEMP%</Button>
-                    <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Click="RAM_Click">Zwolnienie nieużywanej pamięci RAM</Button>
+                    <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource DarkButtonStyle}" Click="DNS_Click">Optymalizacja cache DNS(internet)</Button>
+                    <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource DarkButtonStyle}" Click="Deleting_Click">Usunięcie plików tymczasowych</Button>
+                    <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource DarkButtonStyle}" Click="Trash_Click">Usunięcie plików z kosza</Button>
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource DarkButtonStyle}" Click="TEMP_delete_Click">Czyszczenie folderu tymczasowego %TEMP%</Button>
+                    <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource DarkButtonStyle}" Grid.ColumnSpan="2" Click="RAM_Click">Zwolnienie nieużywanej pamięci RAM</Button>
                     
                     
                 </Grid>
@@ -76,38 +85,46 @@
 
             </StackPanel>
         </TabItem>
-        <TabItem Header="Processor" RenderTransformOrigin="4.807,14.428">
+        <TabItem Width="5" Visibility="Hidden"></TabItem>
+        <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="Procesor">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora</TextBlock>
-                <TextBlock HorizontalAlignment="Center" x:Name="name_proc"></TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora</TextBlock>
+                <TextBlock HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
                 <Label/>
-                <TextBlock HorizontalAlignment="Center" x:Name="usage_proc"></TextBlock>
+                <TextBlock HorizontalAlignment="Center" x:Name="usage_proc" ></TextBlock>
                 <Label/>
                 <UniformGrid>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold">Czas pracy CPU: </TextBlock>
-                        <TextBlock x:Name="time_cpu" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock FontWeight="Bold">Liczba rdzeni: </TextBlock>
-                        <TextBlock x:Name="cores_of_cpu" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock FontWeight="Bold">Liczba wątków: </TextBlock>
-                        <TextBlock x:Name="ammount_of_threats" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Czas pracy CPU:</TextBlock>
+                        <TextBlock x:Name="time_cpu" HorizontalAlignment="Center" ></TextBlock>
+                        
+                        <TextBlock FontWeight="Bold" >Liczba rdzeni: </TextBlock>
+                        <TextBlock x:Name="cores_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+                        
+                        <TextBlock FontWeight="Bold" >Liczba wątków: </TextBlock>
+                        <TextBlock x:Name="ammount_of_threats" HorizontalAlignment="Center" ></TextBlock>
+                        
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold">Szacowana prędkość procesora:</TextBlock>
-                        <TextBlock x:Name="speed_of_cpu" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock FontWeight="Bold">Liczba przerwań na sekundę:</TextBlock>
-                        <TextBlock x:Name="proc_temp" HorizontalAlignment="Center"></TextBlock>
-                        <TextBlock FontWeight="Bold">Liczba procesów:</TextBlock>
-                        <TextBlock x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Szacowana prędkość procesora:</TextBlock>
+                        <TextBlock x:Name="speed_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+                        
+                        <TextBlock FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
+                        <TextBlock x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>
+                        
+                        <TextBlock FontWeight="Bold" >Liczba procesów:</TextBlock>
+                        <TextBlock x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center" ></TextBlock>
+                        
                     </StackPanel>
                 </UniformGrid>
             </StackPanel>
         </TabItem>
-        <TabItem Header="GPU">
+        <TabItem Width="5" Visibility="Hidden"></TabItem>
+        <TabItem Style="{StaticResource DarkTabItemStyle}" Header="GPU" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora graficznego</TextBlock>
-                <TextBlock x:Name="GPU_name" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock x:Name="usage_GPU" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora graficznego</TextBlock>
+                <TextBlock x:Name="GPU_name" HorizontalAlignment="Center" ></TextBlock>
+                <TextBlock x:Name="usage_GPU" HorizontalAlignment="Center" ></TextBlock>
                 <Label/>
                 <Label/>
                 <Label/>
@@ -115,19 +132,70 @@
                 <Label/>
                 <UniformGrid>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold">Wersja zainstalowanego sterownika:</TextBlock>
-                        <TextBlock x:Name="GPU_driver_version" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
+                        <TextBlock x:Name="GPU_driver_version" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
-                        <TextBlock FontWeight="Bold">Pamięć wbudowana:</TextBlock>
-                        <TextBlock x:Name="GPU_memory_available" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Pamięć wbudowana:</TextBlock>
+                        <TextBlock x:Name="GPU_memory_available" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBlock FontWeight="Bold">Temperatura GPU:</TextBlock>
-                        <TextBlock x:Name="GPU_temp" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Temperatura GPU:</TextBlock>
+                        <TextBlock x:Name="GPU_temp" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
-                        <TextBlock FontWeight="Bold">Status urządzenia:</TextBlock>
-                        <TextBlock x:Name="GPU_status" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontWeight="Bold" >Status urządzenia:</TextBlock>
+                        <TextBlock x:Name="GPU_status" HorizontalAlignment="Center" ></TextBlock>
+                        <Label/>
+                    </StackPanel>
+                </UniformGrid>
+            </StackPanel>
+        </TabItem>
+        <TabItem Width="5" Visibility="Hidden"></TabItem>
+        <TabItem Style="{StaticResource DarkTabItemStyle}" Header="RAM" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
+            <StackPanel>
+                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące pamięci RAM</TextBlock>
+                <StackPanel Orientation="Horizontal" x:Name="kosci_pamieci" HorizontalAlignment="Center">
+                    <ItemsControl ItemsSource="{Binding RamModules}">
+                        
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate >
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Background="DarkGreen" Width="200" Margin="5">
+                                    <StackPanel> 
+                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding capacity}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding manufacturer}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding speed}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding type}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding serial_number}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding slot}"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <Label/>
+                <Label/>
+                <UniformGrid>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" >Ilość wolnej pamięci wirtualnej:</TextBlock>
+                        <TextBlock x:Name="Free_virtual" HorizontalAlignment="Center" ></TextBlock>
+                        <Label/>
+                        <TextBlock FontWeight="Bold" >Ilość wolnej pamięci RAM:</TextBlock>
+                        <TextBlock x:Name="Free_RAM" HorizontalAlignment="Center" ></TextBlock>
+                        <Label/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" >Ilość całkowitej pamięci wirtualnej:</TextBlock>
+                        <TextBlock x:Name="Virtual_all" HorizontalAlignment="Center" ></TextBlock>
+                        <Label/>
+                        <TextBlock FontWeight="Bold" >Ilość wolnej stronnicowanej pamięci jądra Windows:</TextBlock>
+                        <TextBlock x:Name="Free_core_memory" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
                     </StackPanel>
                 </UniformGrid>

@@ -8,14 +8,19 @@ using System.Net.NetworkInformation;
 using System.IO;
 using System.Runtime.InteropServices;
 using NvAPIWrapper;
+using System.Collections.ObjectModel;
+using System_monitor;
+using System.Text;
 
 
 
 
 namespace SystemMonitor
 {
+    
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
         private PerformanceCounter _cpuCounter;
         private PerformanceCounter _cpuCounter2;
         private PerformanceCounter _cputhreads;
@@ -24,6 +29,7 @@ namespace SystemMonitor
         private PerformanceCounter _cpuinterr;
         private PerformanceCounter _ramCounter;                 // _ ze względu na prywatność zmiennych
         private PerformanceCounter _diskCounter;
+        private PerformanceCounter _pagedPoolCounter;
         private DispatcherTimer _timer;
 
         private float _totalMemory;
@@ -37,7 +43,22 @@ namespace SystemMonitor
             InitializePerformanceCounters();
             StartMonitoring();
             GetGPUInfo();
-
+            SetObjects();
+            DataContext = this;
+        }
+        private void SetObjects() {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT DeviceLocator, Capacity, Manufacturer, SerialNumber, Speed, MemoryType FROM Win32_PhysicalMemory");
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                RamModules.Add(new Kosc_ram(
+                    obj["Capacity"] != null ? $"{Convert.ToUInt64(obj["Capacity"]) / (1024 * 1024 * 1024)} GB" : "Nieznane",
+                    obj["Manufacturer"]?.ToString() ?? "Nieznane",
+                    obj["DeviceLocator"]?.ToString() ?? "Nieznane",
+                    obj["SerialNumber"]?.ToString() ?? "Nieznane",
+                    obj["Speed"] != null ? $"{obj["Speed"]} MHz": "Nieznane",
+                    GetMemoryType(Convert.ToUInt16(obj["MemoryType"]))));
+            }
+            
         }
         private void InitializePerformanceCounters()
         {
@@ -49,6 +70,7 @@ namespace SystemMonitor
             _cpuinterr = new PerformanceCounter("Processor", "Interrupts/sec", "_Total");
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");
+            _pagedPoolCounter = new PerformanceCounter("Memory", "Pool Paged Bytes");
             _totalMemory = GetTotalMemory();
         }
 
@@ -67,14 +89,13 @@ namespace SystemMonitor
             _cpuinterr.NextValue();
             _ramCounter.NextValue();
             _diskCounter.NextValue();
+            _pagedPoolCounter.NextValue();
 
-        }
-
-
+        }   
         public void UpdatePerformanceData(object sender, EventArgs e)
         {
 
-
+            float pagedPool = _pagedPoolCounter.NextValue();
             float cpuUsage = _cpuCounter.NextValue();
             float cputime = _cputime.NextValue();
             float cputhreads = _cputhreads.NextValue();
@@ -89,7 +110,7 @@ namespace SystemMonitor
             TimeSpan uptime = TimeSpan.FromSeconds(cputime);
             time_cpu.Text = $"{uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
 
-
+            pagedPool = pagedPool / (1024 * 1024 * 1024);
             int procenty_cpu = (int)cpuUsage;
             CPU_usagetext.Text = $"{procenty_cpu}%";
             usage_proc.Text = $"{procenty_cpu}%";
@@ -98,6 +119,7 @@ namespace SystemMonitor
             proc_temp.Text = $"{cpuinterr:F0}";
             RAM_usagetext.Text = $"{ramUsagePercentage:F1}%";
             Disk_usagetext.Text = $"{diskUsage:F1}%";
+            Free_core_memory.Text = $"{pagedPool:F2} GB";
 
 
 
@@ -110,8 +132,8 @@ namespace SystemMonitor
             GetGPUInfo3();
             GetCPUInfo();
             GetCPUSpeed();
+            GetMemoryInfo();
         }
-
 
         private float GetTotalMemory()
         {
@@ -126,6 +148,50 @@ namespace SystemMonitor
             return totalMemory;
         }
 
+        private void GetMemoryInfo()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
+
+            foreach (ManagementObject obj in searcher.Get())
+            {
+                Free_RAM.Text = obj["FreePhysicalMemory"] != null ?
+                    $"{Convert.ToUInt64(obj["FreePhysicalMemory"]) / 1024} MB" : "Nieznane";
+
+                Free_virtual.Text = obj["FreeVirtualMemory"] != null ?
+                    $"{Convert.ToUInt64(obj["FreeVirtualMemory"]) / 1024} GB" : "Nieznane";
+
+                Virtual_all.Text = obj.Properties["TotalVirtualMemorySize"] != null ?                ///////To nie działa
+                    $"{Convert.ToUInt64(obj["TotalVirtualMemorySize"]) / 1024} GB" : "Nieznane";
+
+
+            }
+            
+        }
+        private string GetMemoryType(ushort type)
+        {
+            
+            return type switch
+            {
+                20 => "DDR",
+                21 => "DDR2",
+                22 => "DDR2 FB-DIMM",
+                24 => "DDR3",
+                26 => "DDR4",
+                27 => "DDR5",
+                19 => "SDRAM",
+                23 => "DDR2 FB-DIMM (ECC)",
+                28 => "LPDDR",
+                29 => "LPDDR2",
+                30 => "LPDDR3",
+                31 => "LPDDR4",
+                32 => "LPDDR5",
+                33 => "WIDE-IO",
+                34 => "HMC",
+                35 => "HBM",
+                0 => "Nieznane",
+                _ => "Nieznane"
+            };
+        }
 
         private void GetCPUInfo()
         {
@@ -138,7 +204,6 @@ namespace SystemMonitor
                 cores_of_cpu.Text = item["NumberOfCores"]?.ToString();
             }
         }
-
 
         private void GetCPUSpeed()
         {

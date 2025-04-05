@@ -67,3 +67,4 @@ C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\System_monitor.pdb
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\System_monitor.genruntimeconfig.cache
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\ref\System_monitor.dll
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\Themes.baml
