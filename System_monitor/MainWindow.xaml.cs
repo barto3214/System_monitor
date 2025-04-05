@@ -11,6 +11,7 @@ using NvAPIWrapper;
 using System.Collections.ObjectModel;
 using System_monitor;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 
 
@@ -21,6 +22,7 @@ namespace SystemMonitor
     public partial class MainWindow : Window
     {
         public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
+        public int basic_speed{ set; get; }
         private PerformanceCounter _cpuCounter;
         private PerformanceCounter _cpuCounter2;
         private PerformanceCounter _cputhreads;
@@ -33,8 +35,6 @@ namespace SystemMonitor
         private DispatcherTimer _timer;
 
         private float _totalMemory;
-        private long previousReceived = 0;
-        private long previousSent = 0;
 
         public MainWindow()
         {
@@ -158,10 +158,10 @@ namespace SystemMonitor
                     $"{Convert.ToUInt64(obj["FreePhysicalMemory"]) / 1024} MB" : "Nieznane";
 
                 Free_virtual.Text = obj["FreeVirtualMemory"] != null ?
-                    $"{Convert.ToUInt64(obj["FreeVirtualMemory"]) / 1024} GB" : "Nieznane";
+                    $"{Convert.ToUInt64(obj["FreeVirtualMemory"]) / 1024} MB" : "Nieznane";
 
-                Virtual_all.Text = obj.Properties["TotalVirtualMemorySize"] != null ?                ///////To nie działa
-                    $"{Convert.ToUInt64(obj["TotalVirtualMemorySize"]) / 1024} GB" : "Nieznane";
+                Virtual_all.Text = obj.Properties["TotalVirtualMemorySize"] != null ?                
+                    $"{Convert.ToUInt64(obj["TotalVirtualMemorySize"]) / 1024} MB" : "Nieznane";
 
 
             }
@@ -205,13 +205,20 @@ namespace SystemMonitor
             }
         }
 
-        private void GetCPUSpeed()
+        private void GetCPUSpeed()                       
         {
+            
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT CurrentClockSpeed FROM Win32_Processor");
 
+            foreach (ManagementObject obj in searcher.Get())
+            {
+               basic_speed = Convert.ToInt32(obj["CurrentClockSpeed"]);
+            }
+
+            
             float cpuUsage = _cpuCounter2.NextValue();
             float procenty = (float)cpuUsage;
-            int maxSpeed = 3301;
-            float estimatedSpeed = (procenty / 100) * maxSpeed;
+            float estimatedSpeed = (procenty / 100) * basic_speed;
             estimatedSpeed = estimatedSpeed / 100;
             estimatedSpeed = (float)System.Math.Round(estimatedSpeed, 2);
 
@@ -516,4 +523,3 @@ namespace SystemMonitor
         }
     }
 }
-

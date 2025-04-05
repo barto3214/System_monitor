@@ -86,7 +86,7 @@
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
-        <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="Procesor">
+        <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="CPU">
             <StackPanel>
                 <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora</TextBlock>
                 <TextBlock HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
