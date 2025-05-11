@@ -10,15 +10,13 @@ using System.Runtime.InteropServices;
 using NvAPIWrapper;
 using System.Collections.ObjectModel;
 using System_monitor;
-using System.Text;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System.Windows.Controls;
 using System.Security.Cryptography.X509Certificates;
-
-
-
 
 namespace SystemMonitor
 {
-    
     public partial class MainWindow : Window
     {
         public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
@@ -33,6 +31,10 @@ namespace SystemMonitor
         private PerformanceCounter _diskCounter;
         private PerformanceCounter _pagedPoolCounter;
         private DispatcherTimer _timer;
+        private CartesianChart chart;
+        private LineSeries lineSeries;
+        private ChartValues<double> values;
+
 
         private float _totalMemory;
 
@@ -45,6 +47,30 @@ namespace SystemMonitor
             GetGPUInfo();
             SetObjects();
             DataContext = this;
+            values = new ChartValues<double>();
+
+            lineSeries = new LineSeries
+            {
+                Values = values
+            };
+
+            chart = new CartesianChart
+            {
+                Width = 500,
+                Height = 300,
+                LegendLocation = LegendLocation.Top,
+                Series = new SeriesCollection { lineSeries }
+            };
+            chart.AxisY.Add(new Axis
+            {
+                MinValue = 0,  
+                MaxValue = 10,  
+                LabelFormatter = value => value.ToString("F2") 
+            });
+
+
+            charts.Children.Add(chart);
+
         }
         private void SetObjects() {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT DeviceLocator, Capacity, Manufacturer, SerialNumber, Speed, MemoryType FROM Win32_PhysicalMemory");
@@ -64,12 +90,12 @@ namespace SystemMonitor
         {
             _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             _cpuCounter2 = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            _cputime = new PerformanceCounter("System", "System Up Time");
+            _cputime = new PerformanceCounter("System", "System Up Time");                                  
             _cputhreads = new PerformanceCounter("System", "Threads");
             _cpuprocess = new PerformanceCounter("System", "Processes");
             _cpuinterr = new PerformanceCounter("Processor", "Interrupts/sec", "_Total");
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");
+            _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");                 
             _pagedPoolCounter = new PerformanceCounter("Memory", "Pool Paged Bytes");
             _totalMemory = GetTotalMemory();
         }
@@ -94,7 +120,7 @@ namespace SystemMonitor
         }   
         public void UpdatePerformanceData(object sender, EventArgs e)
         {
-
+            //variables with performance counters
             float pagedPool = _pagedPoolCounter.NextValue();
             float cpuUsage = _cpuCounter.NextValue();
             float cputime = _cputime.NextValue();
@@ -103,13 +129,30 @@ namespace SystemMonitor
             float cpuinterr = _cpuinterr.NextValue();
             float diskUsage = _diskCounter.NextValue();
 
+            //RAM usage
             float availableMemoryInMb = _ramCounter.NextValue();
             float usedMemoryInMb = _totalMemory - availableMemoryInMb;
-            float ramUsagePercentage = (usedMemoryInMb / _totalMemory) * 100;
+            float ramUsagePercentage = (usedMemoryInMb / _totalMemory) * 100;  
+            
+
+            //points
+            int RAM_points = performance_counter_points(ramUsagePercentage);
+            int CPU_points = performance_counter_points(cpuUsage);
+            int Disk_points = performance_counter_points(diskUsage);
+            int processes_points = performance_counter_points(cpuprocess);
+            int GPU_temp_points = GetGPUInfo().Item2;
+            int GPU_usage_points = GetGPUInfo().Item1;
+
+            //adding points to chart
+            int average_points = Math.Abs(RAM_points + CPU_points + Disk_points + processes_points + GPU_temp_points + GPU_usage_points) / 6;
+
+            values.Add(average_points);
+            
 
             TimeSpan uptime = TimeSpan.FromSeconds(cputime);
             time_cpu.Text = $"{uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
 
+            //variables for text 
             pagedPool = pagedPool / (1024 * 1024 * 1024);
             int procenty_cpu = (int)cpuUsage;
             CPU_usagetext.Text = $"{procenty_cpu}%";
@@ -121,7 +164,7 @@ namespace SystemMonitor
             Disk_usagetext.Text = $"{diskUsage:F1}%";
             Free_core_memory.Text = $"{pagedPool:F2} GB";
 
-
+            
 
             CPU_progress.Value = cpuUsage;
             RAM_progress.Value = ramUsagePercentage;
@@ -133,7 +176,32 @@ namespace SystemMonitor
             GetCPUInfo();
             GetCPUSpeed();
             GetMemoryInfo();
+
+            if (values.Count > 10){
+                values.RemoveAt(0);
+            }
+
         }
+
+        private int performance_counter_points(float usage_to_parse)
+        {
+            if (usage_to_parse > 0 && usage_to_parse <= 34)
+            {
+                return 6;
+            }
+            else if (usage_to_parse >= 34 && usage_to_parse <= 67)
+            {
+                return 12;
+            }
+            else if (usage_to_parse >= 67 && usage_to_parse <= 100)
+            {
+                return 18;
+            }
+
+
+            return 0;
+        }
+
 
         private float GetTotalMemory()
         {
@@ -216,7 +284,7 @@ namespace SystemMonitor
             }
 
             
-            float cpuUsage = _cpuCounter2.NextValue();
+            float cpuUsage = _cpuCounter2.NextValue();                                      
             float procenty = (float)cpuUsage;
             float estimatedSpeed = (procenty / 100) * basic_speed;
             estimatedSpeed = estimatedSpeed / 100;
@@ -240,9 +308,12 @@ namespace SystemMonitor
                 }
             }
         }
-        private void GetGPUInfo()
+        public Tuple<int, int> GetGPUInfo()
         {
-            foreach (var gpu in PhysicalGPU.GetPhysicalGPUs())
+            int GPU_usage_points = 0;
+            int GPU_temp_points = 0;
+
+            foreach (var gpu in PhysicalGPU.GetPhysicalGPUs()) // GPU usage, GPU temp
             {
                 IThermalSensor[] sensors = gpu.ThermalSensors;
                 IDisplayDriverMemoryInfo displayDriverMemoryInfo = gpu.MemoryInfo;
@@ -250,6 +321,7 @@ namespace SystemMonitor
                 GPU_usagetext.Text = $"{gpu_usage}";
                 usage_GPU.Text = $"{gpu_usage}";
                 gpu_usage = gpu_usage.Replace("%", "");
+                GPU_usage_points = performance_counter_points(float.Parse(gpu_usage));
                 if (int.TryParse(gpu_usage, out int gpu_usage_int))
                 {
                     GPU_progress.Value = gpu_usage_int;
@@ -261,12 +333,25 @@ namespace SystemMonitor
                         for (int i = 5; i < 10; i++)
                         {
                             GPU_temp.Text = $"{sensor.CurrentTemperature} °C";
+                            if (sensor.CurrentTemperature > 20 && sensor.CurrentTemperature < 65) {
+                                GPU_temp_points = 6;
+                            }
+                            else if (sensor.CurrentTemperature >= 65 && sensor.CurrentTemperature < 85)
+                            {
+                                GPU_temp_points = 12;
+                            }
+                            else if (sensor.CurrentTemperature >= 85)
+                            {
+                                GPU_temp_points = 18;
+                            }
+
                             GPU_memory_available.Text = $"{displayDriverMemoryInfo.AvailableDedicatedVideoMemory / 1000000} GB";
-                        }  
+                        }
                     }
                 }
             }
 
+            return Tuple.Create(GPU_usage_points, GPU_temp_points);
         }
         private async void UpdateNetworkStats(object sender, EventArgs e)
         {

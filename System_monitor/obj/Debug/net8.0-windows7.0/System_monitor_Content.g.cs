@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("system_monitor4.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("system_monitor2.ico")]
 
 

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.4" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
     <PackageReference Include="NvAPIWrapper.NetStandard" Version="1.0.5" />
     <PackageReference Include="OpenHardwareMonitor" Version="0.9.6" />

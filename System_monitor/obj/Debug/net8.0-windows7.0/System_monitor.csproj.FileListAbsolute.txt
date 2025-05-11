@@ -69,3 +69,5 @@ C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\ref\System_monitor.dll
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\Themes.baml
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.0-windows7.0\System_monitor_Content.g.cs
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\bin\Debug\net8.0-windows7.0\LiveCharts.dll
+C:\Users\barte\source\repos\probna\System_monitor\System_monitor\bin\Debug\net8.0-windows7.0\LiveCharts.Wpf.dll
