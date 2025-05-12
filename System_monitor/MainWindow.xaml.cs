@@ -15,6 +15,7 @@ using LiveCharts.Wpf;
 using System.Windows.Controls;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace SystemMonitor
 {
     public partial class MainWindow : Window
@@ -34,6 +35,7 @@ namespace SystemMonitor
         private CartesianChart chart;
         private LineSeries lineSeries;
         private ChartValues<double> values;
+       
 
 
         private float _totalMemory;
@@ -47,10 +49,13 @@ namespace SystemMonitor
             GetGPUInfo();
             SetObjects();
             DataContext = this;
+
+            // Initialize the chart
             values = new ChartValues<double>();
 
             lineSeries = new LineSeries
             {
+                Title = "Stan użycia systemu",
                 Values = values
             };
 
@@ -60,12 +65,24 @@ namespace SystemMonitor
                 Height = 300,
                 LegendLocation = LegendLocation.Top,
                 Series = new SeriesCollection { lineSeries }
+                
             };
+            chart.AxisX.Add(new Axis
+            {   
+                Title = "Czas",
+                Separator = new LiveCharts.Wpf.Separator
+                {
+                    Step = 1,
+                    IsEnabled = false
+                    
+                }
+
+            });
             chart.AxisY.Add(new Axis
             {
-                MinValue = 0,  
-                MaxValue = 10,  
-                LabelFormatter = value => value.ToString("F2") 
+                Unit = 1,
+                Title = "Wydajność",
+                LabelFormatter = value => value.ToString("F0") + "%"
             });
 
 
@@ -135,18 +152,30 @@ namespace SystemMonitor
             float ramUsagePercentage = (usedMemoryInMb / _totalMemory) * 100;  
             
 
-            //points
+            //points     
             int RAM_points = performance_counter_points(ramUsagePercentage);
             int CPU_points = performance_counter_points(cpuUsage);
             int Disk_points = performance_counter_points(diskUsage);
-            int processes_points = performance_counter_points(cpuprocess);
             int GPU_temp_points = GetGPUInfo().Item2;
             int GPU_usage_points = GetGPUInfo().Item1;
+            int processes_points = 0;
+
+            if (cpuprocess > 0 && cpuprocess < 100)
+            {
+                processes_points = 6;
+            }
+            else if (cpuprocess >= 101 && cpuprocess < 250)
+            {
+                processes_points = 12;
+            }
+            else if (cpuprocess >= 250)
+            {
+                processes_points = 18;
+            }
 
             //adding points to chart
             int average_points = Math.Abs(RAM_points + CPU_points + Disk_points + processes_points + GPU_temp_points + GPU_usage_points) / 6;
-
-            values.Add(average_points);
+            values.Add((average_points * 100) / 18);
             
 
             TimeSpan uptime = TimeSpan.FromSeconds(cputime);
@@ -177,7 +206,7 @@ namespace SystemMonitor
             GetCPUSpeed();
             GetMemoryInfo();
 
-            if (values.Count > 10){
+            if (values.Count > 11){
                 values.RemoveAt(0);
             }
 
