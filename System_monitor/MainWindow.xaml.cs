@@ -12,9 +12,6 @@ using System.Collections.ObjectModel;
 using System_monitor;
 using LiveCharts;
 using LiveCharts.Wpf;
-using System.Windows.Controls;
-using System.Security.Cryptography.X509Certificates;
-
 
 namespace SystemMonitor
 {
@@ -23,7 +20,6 @@ namespace SystemMonitor
         public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
         public int basic_speed{ set; get; }
         private PerformanceCounter _cpuCounter;
-        private PerformanceCounter _cpuCounter2;
         private PerformanceCounter _cputhreads;
         private PerformanceCounter _cpuprocess;
         private PerformanceCounter _cputime;
@@ -35,7 +31,10 @@ namespace SystemMonitor
         private CartesianChart chart;
         private LineSeries lineSeries;
         private ChartValues<double> values;
-       
+        public event Action<string> OnLog;
+        public event Action<float, float> OnPassiveResult;
+        public event Action<float, float> OnFullResult;
+
 
 
         private float _totalMemory;
@@ -106,7 +105,6 @@ namespace SystemMonitor
         private void InitializePerformanceCounters()
         {
             _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            _cpuCounter2 = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             _cputime = new PerformanceCounter("System", "System Up Time");                                  
             _cputhreads = new PerformanceCounter("System", "Threads");
             _cpuprocess = new PerformanceCounter("System", "Processes");
@@ -125,7 +123,6 @@ namespace SystemMonitor
             _timer.Tick += UpdateNetworkStats;
             _timer.Start();
             _cpuCounter.NextValue();
-            _cpuCounter2.NextValue();
             _cputime.NextValue();
             _cputhreads.NextValue();
             _cpuprocess.NextValue();
@@ -192,12 +189,25 @@ namespace SystemMonitor
             RAM_usagetext.Text = $"{ramUsagePercentage:F1}%";
             Disk_usagetext.Text = $"{diskUsage:F1}%";
             Free_core_memory.Text = $"{pagedPool:F2} GB";
+            CPU_points_text.Text = $"{CPU_points}";
+            RAM_points_text.Text = $"{RAM_points}";
+            Disk_points_text.Text = $"{Disk_points}";
+            Processes_points_text.Text = $"{processes_points}";
+            temp_points_text.Text = $"{GPU_temp_points}";
+            GPU_points_text.Text = $"{GPU_usage_points}";
 
-            
 
+            //progress bars
             CPU_progress.Value = cpuUsage;
             RAM_progress.Value = ramUsagePercentage;
             Disk_progress.Value = diskUsage;
+
+            VerticalProgress_cpu.Value = CPU_points;
+            VerticalProgress_ram.Value =  RAM_points;
+            VerticalProgress_disk.Value = Disk_points;
+            VerticalProgress_process.Value = processes_points;
+            VerticalProgress_temp.Value = GPU_temp_points;
+            VerticalProgress_gpu.Value = GPU_usage_points;
 
 
             GetGPUInfo();
@@ -313,7 +323,7 @@ namespace SystemMonitor
             }
 
             
-            float cpuUsage = _cpuCounter2.NextValue();                                      
+            float cpuUsage = _cpuCounter.NextValue();                                      
             float procenty = (float)cpuUsage;
             float estimatedSpeed = (procenty / 100) * basic_speed;
             estimatedSpeed = estimatedSpeed / 100;
@@ -634,6 +644,89 @@ namespace SystemMonitor
             }
 
             MessageBox.Show($"Operacja zakończona. Pomyślnie zwolniono pamięć dla {successCount} procesów. Wystąpiły błędy dla {failureCount} procesów.");
+        }
+
+        public void Easy_benchmark_click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Benchmark trwa 1 sekundę. Proszę czekać.");
+            RunEasyBenchmarkAsync();
+            MessageBox.Show("Benchmark zakończony.");
+        }
+        private async Task RunEasyBenchmarkAsync() {
+            await Task.Delay(1000);
+            float cpu = _cpuCounter.NextValue();
+            float ram = _ramCounter.NextValue();
+            float total_memory = _totalMemory;
+            float ram_usage = (total_memory - ram) / total_memory * 100;
+
+        }
+
+        public void Hard_benchmark_click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Benchmark trwa 10 sekund. Proszę czekać.");
+            RunFullBenchmarkAsync(10);                    //Dokończyć naprawę, upewnij się, że testy sie wgl robią i upewnij sie co do ich działania  
+            MessageBox.Show("Benchmark zakończony.");
+        }
+
+        private async Task RunFullBenchmarkAsync(int seconds = 10) {
+            var cpuTask = Task.Run(() => CPU_stress_test(seconds));
+            var ramTask = Task.Run(() => RAM_stress_test(seconds));
+
+            await Task.WhenAll(cpuTask, ramTask);
+            float cpu = _cpuCounter.NextValue();
+            float ram = _ramCounter.NextValue();
+            float total_memory = _totalMemory;
+            float ram_usage = (total_memory - ram) / total_memory * 100;
+        }
+
+        private void CPU_stress_test(int seconds) {
+            List<Task> threads = new();
+            for (int i = 0; i < Environment.ProcessorCount; i++)
+            {
+                threads.Add(Task.Run(() =>
+                {
+                    var sw = Stopwatch.StartNew();
+                    while (sw.Elapsed.TotalSeconds < seconds)
+                    {
+                        double x = Math.Sqrt(12345.6789);
+                    }
+                }));
+            }
+            Task.WaitAll(threads.ToArray());
+        }
+        private void RAM_stress_test(int seconds) {
+            List<byte[]> buffers = new List<byte[]>();
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+
+            while (sw.Elapsed.TotalSeconds < seconds)
+            {
+                
+                byte[] buffer = new byte[10 * 1024 * 1024];
+
+                
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    buffer[i] = (byte)(i % 256);
+                }
+
+                
+                long sum = 0;
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    sum += buffer[i];
+                }
+
+                buffers.Add(buffer);
+
+               
+                if (buffers.Count > 10)
+                {
+                    buffers.RemoveAt(0);
+                }
+
+                
+                Thread.Sleep(500);
+            }
         }
     }
 }
