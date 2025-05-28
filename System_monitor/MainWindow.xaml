@@ -119,8 +119,8 @@
 
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Szacowana prędkość procesora:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="speed_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Jak dużo przeskoków między zadaniami/sec:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="speed_of_jumping_cpu" HorizontalAlignment="Center" ></TextBlock>
 
                                 <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
                                 <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>

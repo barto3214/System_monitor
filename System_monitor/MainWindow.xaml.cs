@@ -27,6 +27,7 @@ namespace SystemMonitor
         private PerformanceCounter _ramCounter;                 // _ ze względu na prywatność zmiennych
         private PerformanceCounter _diskCounter;
         private PerformanceCounter _pagedPoolCounter;
+        private PerformanceCounter _howmuchjumpsCPU;
         private DispatcherTimer _timer;
         private CartesianChart chart;
         private LineSeries lineSeries;
@@ -112,6 +113,7 @@ namespace SystemMonitor
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
             _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");                 
             _pagedPoolCounter = new PerformanceCounter("Memory", "Pool Paged Bytes");
+            _howmuchjumpsCPU = new PerformanceCounter("System", "Context Switches/sec");
             _totalMemory = GetTotalMemory();
         }
 
@@ -130,6 +132,7 @@ namespace SystemMonitor
             _ramCounter.NextValue();
             _diskCounter.NextValue();
             _pagedPoolCounter.NextValue();
+            _howmuchjumpsCPU.NextValue();
 
         }   
         public void UpdatePerformanceData(object sender, EventArgs e)
@@ -142,6 +145,7 @@ namespace SystemMonitor
             float cpuprocess = _cpuprocess.NextValue();
             float cpuinterr = _cpuinterr.NextValue();
             float diskUsage = _diskCounter.NextValue();
+            float jumps_cpu = _howmuchjumpsCPU.NextValue();
 
             //RAM usage
             float availableMemoryInMb = _ramCounter.NextValue();
@@ -195,6 +199,7 @@ namespace SystemMonitor
             Processes_points_text.Text = $"{processes_points}";
             temp_points_text.Text = $"{GPU_temp_points}";
             GPU_points_text.Text = $"{GPU_usage_points}";
+            speed_of_jumping_cpu.Text = $"{jumps_cpu:F0}";
 
 
             //progress bars
@@ -213,7 +218,6 @@ namespace SystemMonitor
             GetGPUInfo();
             GetGPUInfo3();
             GetCPUInfo();
-            GetCPUSpeed();
             GetMemoryInfo();
 
             if (values.Count > 11){
@@ -310,30 +314,6 @@ namespace SystemMonitor
                 name_proc.Text = item["Name"].ToString();
                 cores_of_cpu.Text = item["NumberOfCores"]?.ToString();
             }
-        }
-
-        private void GetCPUSpeed()                       
-        {
-            
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT CurrentClockSpeed FROM Win32_Processor");
-
-            foreach (ManagementObject obj in searcher.Get())
-            {
-               basic_speed = Convert.ToInt32(obj["CurrentClockSpeed"]);
-            }
-
-            
-            float cpuUsage = _cpuCounter.NextValue();                                      
-            float procenty = (float)cpuUsage;
-            float estimatedSpeed = (procenty / 100) * basic_speed;
-            estimatedSpeed = estimatedSpeed / 100;
-            estimatedSpeed = (float)System.Math.Round(estimatedSpeed, 2);
-
-            if(estimatedSpeed < 4.5)
-            {
-                speed_of_cpu.Text = $"{estimatedSpeed} GHz";
-            }
-            
         }
         private void GetGPUInfo3()
         {
