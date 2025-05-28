@@ -646,12 +646,14 @@ namespace SystemMonitor
             MessageBox.Show($"Operacja zakończona. Pomyślnie zwolniono pamięć dla {successCount} procesów. Wystąpiły błędy dla {failureCount} procesów.");
         }
 
-        public void Easy_benchmark_click(object sender, RoutedEventArgs e)
+        public async void Easy_benchmark_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Benchmark trwa 1 sekundę. Proszę czekać.");
-            RunEasyBenchmarkAsync();
-            MessageBox.Show("Benchmark zakończony.");
+            MessageBox.Show("Ocena wydajności potrwa 1 sekundę. Proszę czekać.");
+            MessageBox.Show("Ten test wydajnościowy mierzy obciążenie procesora i zużycie pamięci RAM w spoczynku." +
+                "\r\nJest przydatny do ogólnej oceny wydajności systemu bez dużego obciążenia.");
+            await RunEasyBenchmarkAsync();
         }
+
         private async Task RunEasyBenchmarkAsync() {
             await Task.Delay(1000);
             float cpu = _cpuCounter.NextValue();
@@ -659,24 +661,42 @@ namespace SystemMonitor
             float total_memory = _totalMemory;
             float ram_usage = (total_memory - ram) / total_memory * 100;
 
+            string result = $"Wyniki testu wydajności (Łatwy):\n\n" +
+                   $"CPU Usage: {cpu:F2}%\n" +
+                   $"RAM Usage: {ram_usage:F2}%\n" +
+                   $"Wolna Pamięć: {ram:F2} MB\n" +
+                   $"Całkowita Pamięć: {total_memory:F2} MB";
+
+            MessageBox.Show(result,"Test wydajności zakończony");
         }
 
-        public void Hard_benchmark_click(object sender, RoutedEventArgs e)
+        public async void Hard_benchmark_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Benchmark trwa 10 sekund. Proszę czekać.");
-            RunFullBenchmarkAsync(10);                    //Dokończyć naprawę, upewnij się, że testy sie wgl robią i upewnij sie co do ich działania  
-            MessageBox.Show("Benchmark zakończony.");
+            MessageBox.Show("Test wydajności potrwa 10 sekund. Proszę czekać.");
+            MessageBox.Show("Aplikacja celowo maksymalnie obciąża procesor i pamięć RAM, by sprawdzić," +
+                " jak Twój komputer radzi sobie pod dużym naciskiem.\r\nPodczas testu komputer może się lekko zawiesić" +
+                " – to normalne.\r\nPo zakończeniu zobaczysz średnie zużycie CPU, RAM oraz ilość dostępnej pamięci.");
+            await RunFullBenchmarkAsync(10);                      
         }
 
         private async Task RunFullBenchmarkAsync(int seconds = 10) {
+            var cpumonitor = monitor_cpu_during_test(seconds);
             var cpuTask = Task.Run(() => CPU_stress_test(seconds));
             var ramTask = Task.Run(() => RAM_stress_test(seconds));
 
-            await Task.WhenAll(cpuTask, ramTask);
-            float cpu = _cpuCounter.NextValue();
+            await Task.WhenAll(cpuTask, ramTask,cpumonitor);
+            float cpu = await cpumonitor;
             float ram = _ramCounter.NextValue();
             float total_memory = _totalMemory;
             float ram_usage = (total_memory - ram) / total_memory * 100;
+
+            string result = $"Wyniki testu wydajności (Trudny):\n\n" +
+                    $"CPU Usage: {cpu:F2}%\n" +
+                    $"RAM Usage: {ram_usage:F2}%\n" +
+                    $"Wolna Pamięć: {ram:F2} MB\n" +
+                    $"Całkowita Pamięć: {total_memory:F2} MB";
+
+            MessageBox.Show(result,"Test wydajności zakończony");
         }
 
         private void CPU_stress_test(int seconds) {
@@ -727,6 +747,16 @@ namespace SystemMonitor
                 
                 Thread.Sleep(500);
             }
+        }
+
+        private async Task<float> monitor_cpu_during_test(int seconds) {
+            List<float> cpuusages = new();
+            for (int i = 0; i < seconds; i++)
+            {
+                cpuusages.Add(_cpuCounter.NextValue());
+                await Task.Delay(1000);
+            }
+            return cpuusages.Average();
         }
     }
 }

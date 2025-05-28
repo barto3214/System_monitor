@@ -1,46 +1,111 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">  
 
-    <!-- Główne kolory motywu -->
-    <Color x:Key="PrimaryColor">#1D2131</Color>
-    <Color x:Key="SecondaryColor">#282828</Color>
-    <Color x:Key="AccentColor">#3B82F6</Color>
-    <Color x:Key="HoverColor">#4F91F6</Color>
-    <Color x:Key="TextColor">#E0E0E0</Color>
-    <Color x:Key="BackgroundColor">#414141</Color>
-    <Color x:Key="Progress_bar_color">#5A88D1</Color>
-    <Color x:Key="ShadowColor">#000000</Color>
-    <Color x:Key="CardBackgroundColor">#202020</Color>
-    <Color x:Key="TabItemBorderColor">#42387B</Color>
-    <!-- Dodany kolor obramowania zakładek -->
+   <!-- Główne kolory motywu -->
+   <Color x:Key="PrimaryColor">#1D2131</Color>
+    <Color x:Key="PrimaryColor2">#2F3A44</Color>
+   <Color x:Key="SecondaryColor">#282828</Color>  
+   <Color x:Key="AccentColor">#3B82F6</Color>  
+   <Color x:Key="HoverColor">#4F91F6</Color>  
+   <Color x:Key="TextColor">#E0E0E0</Color>  
+   <Color x:Key="BackgroundColor">#414141</Color>  
+   <Color x:Key="Progress_bar_color">#5A88D1</Color>  
+   <Color x:Key="ShadowColor">#000000</Color>  
+   <Color x:Key="CardBackgroundColor">#202020</Color>  
+   <Color x:Key="TabItemBorderColor">#42387B</Color>
+   <Color x:Key="TabItemBorderColor2">#D84315</Color>
 
-    <!-- Pędzle (Brushes) dla UI -->
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
-    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
-    <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}"/>
-    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}"/>
-    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
-    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackgroundColor}"/>
-    <SolidColorBrush x:Key="ShadowBrush" Color="{StaticResource ShadowColor}"/>
-    <SolidColorBrush x:Key="Progress_color" Color="{StaticResource Progress_bar_color}"/>
-    <SolidColorBrush x:Key="TabItemBorderBrush" Color="{StaticResource TabItemBorderColor}"/>
-    <!-- Nowy pędzel -->
 
-    <!-- Styl dla okna -->
-    <Style TargetType="Window" x:Key="Windows">
-        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+
+    <!-- Pędzle (Brushes) dla UI -->  
+   <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+   <SolidColorBrush x:Key="PrimaryBrush2" Color="{StaticResource PrimaryColor2}"/>
+   <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>  
+   <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>  
+   <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}"/>  
+   <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}"/>  
+   <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>  
+   <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackgroundColor}"/>  
+   <SolidColorBrush x:Key="ShadowBrush" Color="{StaticResource ShadowColor}"/>  
+   <SolidColorBrush x:Key="Progress_color" Color="{StaticResource Progress_bar_color}"/>  
+   <SolidColorBrush x:Key="TabItemBorderBrush" Color="{StaticResource TabItemBorderColor}"/>  
+   <SolidColorBrush x:Key="TabItemBorderBrush2" Color="{StaticResource TabItemBorderColor2}"/>
+
+
+    <!-- Styl dla okna -->  
+   <Style TargetType="Window" x:Key="Windows">  
+       <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>  
+       <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>  
+   </Style>  
+
+   <!-- Styl dla przycisków -->  
+   <Style TargetType="Button" x:Key="DarkButtonStyle">  
+       <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>  
+       <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>  
+       <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>  
+       <Setter Property="Padding" Value="12,6"/>  
+       <Setter Property="FontSize" Value="14"/>  
+       <Setter Property="Cursor" Value="Hand"/>  
+       <Setter Property="Effect">  
+           <Setter.Value>  
+               <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="5" Opacity="0.3"/>  
+           </Setter.Value>  
+       </Setter>  
+       <Setter Property="Template">  
+           <Setter.Value>  
+               <ControlTemplate TargetType="Button">  
+                   <Border Background="{TemplateBinding Background}"  
+                           BorderBrush="{TemplateBinding BorderBrush}"  
+                           BorderThickness="2"  
+                           CornerRadius="6"  
+                           Padding="5">  
+                       <ContentPresenter HorizontalAlignment="Center"  
+                                         VerticalAlignment="Center"/>  
+                   </Border>  
+                   <ControlTemplate.Triggers>  
+                       <Trigger Property="IsMouseOver" Value="True">  
+                           <Setter Property="Background" Value="{StaticResource HoverBrush}"/>  
+                           <Setter Property="Foreground" Value="Black"/>  
+                       </Trigger>  
+                       <Trigger Property="IsPressed" Value="True">  
+                           <Setter Property="Background" Value="{StaticResource AccentBrush}"/>  
+                           <Setter Property="Effect">  
+                               <Setter.Value>  
+                                   <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="8" Opacity="0.5"/>  
+                               </Setter.Value>  
+                           </Setter>  
+                       </Trigger>  
+                   </ControlTemplate.Triggers>  
+               </ControlTemplate>  
+           </Setter.Value>  
+       </Setter>  
+   </Style>  
+
+   <!-- Styl dla kart (Paneli) -->  
+   <Style TargetType="Border" x:Key="CardStyle">  
+       <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>  
+       <Setter Property="BorderThickness" Value="1.5"/>  
+       <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>  
+       <Setter Property="CornerRadius" Value="10"/>  
+       <Setter Property="Padding" Value="20"/>  
+       <Setter Property="Effect">  
+           <Setter.Value>  
+               <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="8" Opacity="0.4"/>  
+           </Setter.Value>  
+       </Setter>  
+   </Style>
+
+    
+    <!--Styl dla label(pełniących role textblocka)-->
+    <Style x:Key="DarkLabelStyle" TargetType="Label">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush2}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-    </Style>
-
-    <!-- Styl dla przycisków -->
-    <Style TargetType="Button" x:Key="DarkButtonStyle">
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="Padding" Value="10,6"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush2}"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="5" Opacity="0.3"/>
@@ -48,104 +113,97 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="2"
-                            CornerRadius="6"
-                            Padding="5">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                <ControlTemplate TargetType="Label">
+                    <Border 
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="6"                      
+                        Padding="{TemplateBinding Padding}">
+                        <ContentPresenter
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        RecognizesAccessKey="True"/>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource HoverBrush}"/>
-                            <Setter Property="Foreground" Value="Black"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="8" Opacity="0.5"/>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!-- Styl dla kart (Paneli) -->
-    <Style TargetType="Border" x:Key="CardStyle">
-        <Setter Property="Background" Value="{StaticResource CardBackgroundBrush}"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+    
+    <!-- Styl dla obramowania pojedynczego modułu -->
+    <Style x:Key="RamModuleBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush2}"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Margin" Value="5"/>
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="8" Opacity="0.4"/>
+                <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="5" Opacity="0.3"/>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!-- Styl dla TextBox -->
-    <Style TargetType="TextBox" x:Key="DarkTextBoxStyle">
-        <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
+    <!-- Bazowy styl dla TextBlocków wewnątrz modułu -->
+    <Style x:Key="RamModuleTextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-        <Setter Property="Padding" Value="10"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect Color="{StaticResource ShadowColor}" BlurRadius="4" Opacity="0.2"/>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Styl dla nagłówka modułu -->
+    <Style x:Key="RamModuleHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource RamModuleTextStyle}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+        <!-- 10px odstępu poniżej -->
     </Style>
 
 
-    <!-- Styl dla TabItem -->
-    <Style x:Key="DarkTabItemStyle" TargetType="TabItem">
-    <Setter Property="Background" Value="#202020"/>
-    <Setter Property="BorderBrush" Value="#42387B"/>
-    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-    <Setter Property="BorderThickness" Value="2"/>
-    <Setter Property="Padding" Value="20,0"/>
-    <Setter Property="Margin" Value="0"/>
-    <Setter Property="Width" Value="110"/>
-    <Setter Property="Height" Value="30"/>
-    <Setter Property="Template">
-        <Setter.Value>
-            <ControlTemplate TargetType="TabItem">
-                <Border x:Name="Bd"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="8"
-                        Padding="{TemplateBinding Padding}">
-                    <ContentPresenter x:Name="ContentSite"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Center"
-                                      ContentSource="Header"/>
-                </Border>
-                <ControlTemplate.Triggers>
-                    <!-- Trigger dla wybranego zakładki -->
-                    <Trigger Property="IsSelected" Value="True">
-                        <Setter TargetName="Bd" Property="Background" Value="#202020"/>
-                        <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFFFF"/>
-                        
-                    </Trigger>
-                    <!-- Trigger dla hover (najechanie myszą) -->
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter TargetName="Bd" Property="BorderBrush" Value="#AAAAFF"/>
-                    </Trigger>
-                </ControlTemplate.Triggers>
-            </ControlTemplate>
-        </Setter.Value>
-    </Setter>
-</Style>
+    <!-- Styl dla TabItem -->  
+   <Style x:Key="DarkTabItemStyle" TargetType="TabItem">  
+   <Setter Property="Background" Value="#202020"/>  
+   <Setter Property="BorderBrush" Value="#42387B"/>  
+   <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>  
+   <Setter Property="BorderThickness" Value="2"/>  
+   <Setter Property="Padding" Value="20,0"/>  
+   <Setter Property="Margin" Value="0"/>  
+   <Setter Property="Width" Value="110"/>  
+   <Setter Property="Height" Value="30"/>  
+   <Setter Property="Template">  
+       <Setter.Value>  
+           <ControlTemplate TargetType="TabItem">  
+               <Border x:Name="Bd"  
+                       Background="{TemplateBinding Background}"  
+                       BorderBrush="{TemplateBinding BorderBrush}"  
+                       BorderThickness="{TemplateBinding BorderThickness}"  
+                       CornerRadius="8"  
+                       Padding="{TemplateBinding Padding}">  
+                   <ContentPresenter x:Name="ContentSite"  
+                                     VerticalAlignment="Center"  
+                                     HorizontalAlignment="Center"  
+                                     ContentSource="Header"/>  
+               </Border>  
+               <ControlTemplate.Triggers>  
+                   <!-- Trigger dla wybranego zakładki -->  
+                   <Trigger Property="IsSelected" Value="True">  
+                       <Setter TargetName="Bd" Property="Background" Value="#202020"/>  
+                       <Setter TargetName="Bd" Property="BorderBrush" Value="#FFFFFF"/>  
 
+                   </Trigger>  
+                   <!-- Trigger dla hover (najechanie myszą) -->  
+                   <Trigger Property="IsMouseOver" Value="True">  
+                       <Setter TargetName="Bd" Property="BorderBrush" Value="#AAAAFF"/>  
+                   </Trigger>  
+               </ControlTemplate.Triggers>  
+           </ControlTemplate>  
+       </Setter.Value>  
+   </Setter>  
+</Style>  
 
 </ResourceDictionary>

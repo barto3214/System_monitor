@@ -95,66 +95,79 @@
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="CPU">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora</TextBlock>
-                <TextBlock HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
-                <Label/>
-                <TextBlock HorizontalAlignment="Center" x:Name="usage_proc" ></TextBlock>
-                <Label/>
-                <UniformGrid>
+                <Border Style="{DynamicResource RamModuleBorderStyle}">
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" >Czas pracy CPU:</TextBlock>
-                        <TextBlock x:Name="time_cpu" HorizontalAlignment="Center" ></TextBlock>
-                        
-                        <TextBlock FontWeight="Bold" >Liczba rdzeni: </TextBlock>
-                        <TextBlock x:Name="cores_of_cpu" HorizontalAlignment="Center" ></TextBlock>
-                        
-                        <TextBlock FontWeight="Bold" >Liczba wątków: </TextBlock>
-                        <TextBlock x:Name="ammount_of_threats" HorizontalAlignment="Center" ></TextBlock>
-                        
+                        <TextBlock Style="{DynamicResource RamModuleHeaderStyle}" FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora</TextBlock>
+                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
+                        <Label/>
+                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" HorizontalAlignment="Center" x:Name="usage_proc" ></TextBlock>
+                        <Label/>
+                        <Label/>
+                        <Label/>
+                        <Label/>
+                        <Label/>
+                        <UniformGrid>
+                            <StackPanel>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Czas pracy CPU:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="time_cpu" HorizontalAlignment="Center" ></TextBlock>
+
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba rdzeni:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="cores_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba wątków:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="ammount_of_threats" HorizontalAlignment="Center" ></TextBlock>
+
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Szacowana prędkość procesora:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="speed_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>
+
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba procesów:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center" ></TextBlock>
+
+                            </StackPanel>
+                        </UniformGrid>
                     </StackPanel>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" >Szacowana prędkość procesora:</TextBlock>
-                        <TextBlock x:Name="speed_of_cpu" HorizontalAlignment="Center" ></TextBlock>
-                        
-                        <TextBlock FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
-                        <TextBlock x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>
-                        
-                        <TextBlock FontWeight="Bold" >Liczba procesów:</TextBlock>
-                        <TextBlock x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center" ></TextBlock>
-                        
-                    </StackPanel>
-                </UniformGrid>
+                </Border>
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="GPU" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora graficznego</TextBlock>
-                <TextBlock x:Name="GPU_name" HorizontalAlignment="Center" ></TextBlock>
-                <TextBlock x:Name="usage_GPU" HorizontalAlignment="Center" ></TextBlock>
-                <Label/>
-                <Label/>
-                <Label/>
-                <Label/>
-                <Label/>
-                <UniformGrid>
+                <Border Style="{DynamicResource RamModuleBorderStyle}">
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
-                        <TextBlock x:Name="GPU_driver_version" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Style="{DynamicResource RamModuleHeaderStyle}" FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora graficznego</TextBlock>
+                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_name" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
-                        <TextBlock FontWeight="Bold" >Pamięć wbudowana:</TextBlock>
-                        <TextBlock x:Name="GPU_memory_available" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="usage_GPU" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
+                        <Label/>
+                        <Label/>
+                        <Label/>
+                        <Label/>
+                        <UniformGrid>
+                            <StackPanel>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_driver_version" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Pamięć wbudowana:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_memory_available" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Temperatura GPU:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_temp" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Status urządzenia:</TextBlock>
+                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_status" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                            </StackPanel>
+                        </UniformGrid>
                     </StackPanel>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" >Temperatura GPU:</TextBlock>
-                        <TextBlock x:Name="GPU_temp" HorizontalAlignment="Center" ></TextBlock>
-                        <Label/>
-                        <TextBlock FontWeight="Bold" >Status urządzenia:</TextBlock>
-                        <TextBlock x:Name="GPU_status" HorizontalAlignment="Center" ></TextBlock>
-                        <Label/>
-                    </StackPanel>
-                </UniformGrid>
+                </Border>
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
@@ -172,14 +185,14 @@
                         
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="Black" BorderThickness="3" CornerRadius="10" Background="DarkGreen" Width="200" Margin="5">
+                                <Border Style="{DynamicResource RamModuleBorderStyle}">
                                     <StackPanel> 
                                         <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding capacity}"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding manufacturer}"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding speed}"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding type}"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding serial_number}"/>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding slot}"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding manufacturer}"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding speed}"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding type}"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding serial_number}"/>
+                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding slot}"/>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -211,7 +224,7 @@
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="Punkty wyd." Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły punktów wydajności</TextBlock>
+                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły punktów wydajnościowych</TextBlock>
                 <Label Height="40"/>
                 <Grid>         
                     
@@ -374,10 +387,16 @@
                     </StackPanel>
                 </Grid>
                 <Label/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource DarkButtonStyle}" Click="Easy_benchmark_click">Szybki test wydajności</Button>
-                    <Label Width="50"/>
-                    <Button Style="{StaticResource DarkButtonStyle}" Click="Hard_benchmark_click">Pełny test wydajności</Button>
+                <StackPanel>
+                    <Border Style="{DynamicResource RamModuleBorderStyle}">
+                        <TextBlock Style="{StaticResource RamModuleTextStyle}" Text="Te testy mierzą średnie zużycie CPU i RAM pod obciążeniem(pełny) lub bez(szybki)"/>
+                    </Border>
+                    <Label/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource DarkButtonStyle}" Click="Easy_benchmark_click">Szybki test wydajności</Button>
+                        <Label Width="50"/>
+                        <Button Style="{StaticResource DarkButtonStyle}" Click="Hard_benchmark_click">Pełny test wydajności</Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </TabItem>
