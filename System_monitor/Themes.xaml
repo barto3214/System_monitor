@@ -14,6 +14,9 @@
    <Color x:Key="CardBackgroundColor">#202020</Color>  
    <Color x:Key="TabItemBorderColor">#42387B</Color>
    <Color x:Key="TabItemBorderColor2">#D84315</Color>
+    <Color x:Key="RamBackgroundColor">#142A2E</Color> 
+    <Color x:Key="RamBorderColor">#00D2A8</Color> 
+    <Color x:Key="RamTextColor">#CFFEF5</Color>
 
 
 
@@ -30,6 +33,9 @@
    <SolidColorBrush x:Key="Progress_color" Color="{StaticResource Progress_bar_color}"/>  
    <SolidColorBrush x:Key="TabItemBorderBrush" Color="{StaticResource TabItemBorderColor}"/>  
    <SolidColorBrush x:Key="TabItemBorderBrush2" Color="{StaticResource TabItemBorderColor2}"/>
+   <SolidColorBrush x:Key="RamBackgroundBrush" Color="{StaticResource RamBackgroundColor}" />
+   <SolidColorBrush x:Key="RamBorderBrush" Color="{StaticResource RamBorderColor}" />
+   <SolidColorBrush x:Key="RamTextBrush" Color="{StaticResource RamTextColor}" />
 
 
     <!-- Styl dla okna -->  
@@ -95,7 +101,22 @@
        </Setter>  
    </Style>
 
-    
+    <!-- Styl dla modułu RAM -->
+    <Style x:Key="RamModuleStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource RamBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RamBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="{StaticResource RamBorderColor}" BlurRadius="6" Opacity="0.35"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <!--Styl dla label(pełniących role textblocka)-->
     <Style x:Key="DarkLabelStyle" TargetType="Label">
         <Setter Property="Background" Value="{StaticResource PrimaryBrush2}"/>
@@ -131,7 +152,7 @@
     </Style>
     
     <!-- Styl dla obramowania pojedynczego modułu -->
-    <Style x:Key="RamModuleBorderStyle" TargetType="Border">
+    <Style x:Key="BorderStyle" TargetType="Border">
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TabItemBorderBrush2}"/>
         <Setter Property="BorderThickness" Value="2"/>
@@ -146,7 +167,7 @@
     </Style>
 
     <!-- Bazowy styl dla TextBlocków wewnątrz modułu -->
-    <Style x:Key="RamModuleTextStyle" TargetType="TextBlock">
+    <Style x:Key="TextStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="TextAlignment" Value="Center"/>
@@ -155,7 +176,7 @@
     </Style>
 
     <!-- Styl dla nagłówka modułu -->
-    <Style x:Key="RamModuleHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource RamModuleTextStyle}">
+    <Style x:Key="HeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource TextStyle}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -164,7 +185,8 @@
         <!-- 10px odstępu poniżej -->
     </Style>
 
-
+    
+    
     <!-- Styl dla TabItem -->  
    <Style x:Key="DarkTabItemStyle" TargetType="TabItem">  
    <Setter Property="Background" Value="#202020"/>  

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System_monitor;
 using LiveCharts;
 using LiveCharts.Wpf;
+using System.Threading.Tasks;
 
 namespace SystemMonitor
 {
@@ -29,9 +30,15 @@ namespace SystemMonitor
         private PerformanceCounter _pagedPoolCounter;
         private PerformanceCounter _howmuchjumpsCPU;
         private DispatcherTimer _timer;
-        private CartesianChart chart;
+        private CartesianChart chart1;
+        private CartesianChart chart2;
+        private CartesianChart chart3;
         private LineSeries lineSeries;
+        private LineSeries lineSeries2;
+        private LineSeries lineSeries3;
         private ChartValues<double> values;
+        private ChartValues<double> values2;
+        private ChartValues<double> values3;
         public event Action<string> OnLog;
         public event Action<float, float> OnPassiveResult;
         public event Action<float, float> OnFullResult;
@@ -50,7 +57,7 @@ namespace SystemMonitor
             SetObjects();
             DataContext = this;
 
-            // Initialize the chart
+            // Initialize the chart1
             values = new ChartValues<double>();
 
             lineSeries = new LineSeries
@@ -59,7 +66,7 @@ namespace SystemMonitor
                 Values = values
             };
 
-            chart = new CartesianChart
+            chart1 = new CartesianChart
             {
                 Width = 500,
                 Height = 300,
@@ -67,7 +74,7 @@ namespace SystemMonitor
                 Series = new SeriesCollection { lineSeries }
                 
             };
-            chart.AxisX.Add(new Axis
+            chart1.AxisX.Add(new Axis
             {   
                 Title = "Czas",
                 Separator = new LiveCharts.Wpf.Separator
@@ -78,15 +85,88 @@ namespace SystemMonitor
                 }
 
             });
-            chart.AxisY.Add(new Axis
+            chart1.AxisY.Add(new Axis
             {
                 Unit = 1,
                 Title = "Wydajność",
                 LabelFormatter = value => value.ToString("F0") + "%"
             });
 
+            // Initialize the chart2
+            values2 = new ChartValues<double>();
 
-            charts.Children.Add(chart);
+            lineSeries2 = new LineSeries
+            {
+                Title = "Stan użycia CPU",
+                Values = values2
+            };
+
+            chart2 = new CartesianChart
+            {
+                Width = 500,
+                Height = 300,
+                LegendLocation = LegendLocation.Top,
+                Series = new SeriesCollection { lineSeries2 }
+
+            };
+            chart2.AxisX.Add(new Axis
+            {
+                Title = "Czas",
+                Separator = new LiveCharts.Wpf.Separator
+                {
+                    Step = 1,
+                    IsEnabled = false
+
+                }
+
+            });
+            chart2.AxisY.Add(new Axis
+            {
+                Unit = 1,
+                Title = "Użycie",
+                LabelFormatter = value => value.ToString("F0") + "%"
+            });
+
+
+            // Initialize the chart2
+            values3 = new ChartValues<double>();
+
+            lineSeries3 = new LineSeries
+            {
+                Title = "Stan użycia GPU",
+                Values = values3
+            };
+
+            chart3 = new CartesianChart
+            {
+                Width = 500,
+                Height = 300,
+                LegendLocation = LegendLocation.Top,
+                Series = new SeriesCollection { lineSeries3 }
+
+            };
+            chart3.AxisX.Add(new Axis
+            {
+                Title = "Czas",
+                Separator = new LiveCharts.Wpf.Separator
+                {
+                    Step = 1,
+                    IsEnabled = false
+
+                }
+
+            });
+            chart3.AxisY.Add(new Axis
+            {
+                Unit = 1,
+                Title = "Użycie",
+                LabelFormatter = value => value.ToString("F0") + "%"
+            });
+
+
+            charts1.Children.Add(chart1);
+            charts2.Children.Add(chart2);
+            charts3.Children.Add(chart3);
 
         }
         private void SetObjects() {
@@ -174,13 +254,25 @@ namespace SystemMonitor
                 processes_points = 18;
             }
 
-            //adding points to chart
+            //adding points to chart1
             int average_points = Math.Abs(RAM_points + CPU_points + Disk_points + processes_points + GPU_temp_points + GPU_usage_points) / 6;
             values.Add((average_points * 100) / 18);
             
 
             TimeSpan uptime = TimeSpan.FromSeconds(cputime);
             time_cpu.Text = $"{uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
+
+            //adding points to chart2 
+            values2.Add(cpuUsage);
+
+            TimeSpan uptime2 = TimeSpan.FromSeconds(cputime);
+            time_cpu.Text = $"{uptime2.Hours}h {uptime2.Minutes}m {uptime2.Seconds}s";
+            
+            //adding points to chart3
+            values3.Add(GetGPUInfo().Item3);
+
+            TimeSpan uptime3 = TimeSpan.FromSeconds(cputime);
+            time_cpu.Text = $"{uptime3.Hours}h {uptime3.Minutes}m {uptime3.Seconds}s";
 
             //variables for text 
             pagedPool = pagedPool / (1024 * 1024 * 1024);
@@ -222,6 +314,16 @@ namespace SystemMonitor
 
             if (values.Count > 11){
                 values.RemoveAt(0);
+            }
+
+            if (values2.Count > 16)
+            {
+                values2.RemoveAt(0);
+            }
+
+            if (values3.Count > 16)
+            {
+                values3.RemoveAt(0);
             }
 
         }
@@ -327,10 +429,11 @@ namespace SystemMonitor
                 }
             }
         }
-        public Tuple<int, int> GetGPUInfo()
+        public Tuple<int, int,int> GetGPUInfo()
         {
             int GPU_usage_points = 0;
             int GPU_temp_points = 0;
+            int GPU_usage_to_go = 0;
 
             foreach (var gpu in PhysicalGPU.GetPhysicalGPUs()) // GPU usage, GPU temp
             {
@@ -340,6 +443,7 @@ namespace SystemMonitor
                 GPU_usagetext.Text = $"{gpu_usage}";
                 usage_GPU.Text = $"{gpu_usage}";
                 gpu_usage = gpu_usage.Replace("%", "");
+                GPU_usage_to_go = int.Parse(gpu_usage);
                 GPU_usage_points = performance_counter_points(float.Parse(gpu_usage));
                 if (int.TryParse(gpu_usage, out int gpu_usage_int))
                 {
@@ -370,7 +474,7 @@ namespace SystemMonitor
                 }
             }
 
-            return Tuple.Create(GPU_usage_points, GPU_temp_points);
+            return Tuple.Create(GPU_usage_points, GPU_temp_points,GPU_usage_to_go);
         }
         private async void UpdateNetworkStats(object sender, EventArgs e)
         {
@@ -493,9 +597,12 @@ namespace SystemMonitor
                 $"pominięto folderów: {skipped_folders}");
         }
 
-        private void Trash_Click(object sender, RoutedEventArgs e)
+        private async void Trash_Click(object sender, RoutedEventArgs e)
         {
+            await Task.Run(() => Trash_click());
+        }
 
+        private async void Trash_click() {
             [DllImport("shell32.dll")]
             static extern int SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, uint dwFlags);
 
@@ -504,6 +611,7 @@ namespace SystemMonitor
             const uint SHERB_NOSOUND = 0x00000004;
 
             SHEmptyRecycleBin(IntPtr.Zero, null, SHERB_NOCONFIRMATION | SHERB_NOPROGRESSUI | SHERB_NOSOUND);
+            await Task.Delay(1000); // Odczekaj 1 sekundę, aby upewnić się, że kosz został opróżniony
             MessageBox.Show("Kosz został opróżniony.");
 
         }

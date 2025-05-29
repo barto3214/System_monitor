@@ -66,9 +66,7 @@
                     
                 </StackPanel>
                 <Label/>
-                <StackPanel x:Name="charts">
-                    
-                </StackPanel>
+                <StackPanel x:Name="charts1"></StackPanel>
                 <Label/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -95,41 +93,45 @@
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="CPU">
             <StackPanel>
-                <Border Style="{DynamicResource RamModuleBorderStyle}">
+                <Border Style="{DynamicResource BorderStyle}">
                     <StackPanel>
-                        <TextBlock Style="{DynamicResource RamModuleHeaderStyle}" FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora</TextBlock>
-                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
+                        <TextBlock Style="{DynamicResource HeaderStyle}" FontWeight="Bold" FontSize="20">Szczegóły dotyczące procesora</TextBlock>
+                        <TextBlock Style="{DynamicResource TextStyle}" HorizontalAlignment="Center" x:Name="name_proc" ></TextBlock>
                         <Label/>
-                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" HorizontalAlignment="Center" x:Name="usage_proc" ></TextBlock>
-                        <Label/>
-                        <Label/>
+                        <TextBlock Style="{DynamicResource TextStyle}" HorizontalAlignment="Center" x:Name="usage_proc" ></TextBlock>
                         <Label/>
                         <Label/>
                         <Label/>
-                        <UniformGrid>
+                        <Label/>
+                        <Label/>
+                        <UniformGrid Columns="2" Rows="1">
+                            
                             <StackPanel>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Czas pracy CPU:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="time_cpu" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Czas pracy CPU:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="time_cpu" HorizontalAlignment="Center" ></TextBlock>
 
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba rdzeni:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="cores_of_cpu" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Liczba rdzeni:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="cores_of_cpu" HorizontalAlignment="Center" ></TextBlock>
 
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba wątków:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="ammount_of_threats" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Liczba wątków:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="ammount_of_threats" HorizontalAlignment="Center" ></TextBlock>
 
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Jak dużo przeskoków między zadaniami/sec:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="speed_of_jumping_cpu" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Jak dużo przeskoków między zadaniami/sec:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="speed_of_jumping_cpu" HorizontalAlignment="Center" ></TextBlock>
 
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Liczba przerwań na sekundę:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="proc_temp" HorizontalAlignment="Center" ></TextBlock>
 
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Liczba procesów:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Liczba procesów:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="ammount_of_processes_cpu" HorizontalAlignment="Center" ></TextBlock>
 
                             </StackPanel>
                         </UniformGrid>
+                        <Label/>
+                        <Label/>
+                        <StackPanel x:Name="charts2"></StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -137,35 +139,38 @@
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="GPU" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <Border Style="{DynamicResource RamModuleBorderStyle}">
+                <Border Style="{DynamicResource BorderStyle}">
                     <StackPanel>
-                        <TextBlock Style="{DynamicResource RamModuleHeaderStyle}" FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora graficznego</TextBlock>
-                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_name" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Style="{DynamicResource HeaderStyle}" FontWeight="Bold" FontSize="20" >Szczegóły dotyczące procesora graficznego</TextBlock>
+                        <TextBlock Style="{DynamicResource TextStyle}" x:Name="GPU_name" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
-                        <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="usage_GPU" HorizontalAlignment="Center" ></TextBlock>
-                        <Label/>
-                        <Label/>
+                        <TextBlock Style="{DynamicResource TextStyle}" x:Name="usage_GPU" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
                         <Label/>
                         <Label/>
-                        <UniformGrid>
+                        <Label/>
+                        <Label/>
+                        <UniformGrid Columns="2">
                             <StackPanel>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_driver_version" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="GPU_driver_version" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Pamięć wbudowana:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_memory_available" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Pamięć wbudowana:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="GPU_memory_available" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Temperatura GPU:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_temp" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Temperatura GPU:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="GPU_temp" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" FontWeight="Bold" >Status urządzenia:</TextBlock>
-                                <TextBlock Style="{DynamicResource RamModuleTextStyle}" x:Name="GPU_status" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Status urządzenia:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="GPU_status" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
                             </StackPanel>
                         </UniformGrid>
+                        <Label/>
+                        <Label/>
+                        <StackPanel x:Name="charts3"></StackPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -173,52 +178,57 @@
         <TabItem Width="5" Visibility="Hidden"></TabItem>
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="RAM" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące pamięci RAM</TextBlock>
-                <StackPanel Orientation="Horizontal" x:Name="kosci_pamieci" HorizontalAlignment="Center">
-                    <ItemsControl ItemsSource="{Binding RamModules}">
-                        
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate >
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Style="{DynamicResource RamModuleBorderStyle}">
-                                    <StackPanel> 
-                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding capacity}"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding manufacturer}"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding speed}"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding type}"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding serial_number}"/>
-                                        <TextBlock HorizontalAlignment="Center" Style="{DynamicResource RamModuleTextStyle}" Text="{Binding slot}"/>
-                                    </StackPanel>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-                <Label/>
-                <Label/>
-                <UniformGrid>
+                <Border Style="{DynamicResource BorderStyle}">
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" >Ilość wolnej pamięci wirtualnej:</TextBlock>
-                        <TextBlock x:Name="Free_virtual" HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące pamięci RAM
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" x:Name="kosci_pamieci" HorizontalAlignment="Center">
+                            <ItemsControl ItemsSource="{Binding RamModules}">
+
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate >
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Style="{DynamicResource RamModuleStyle}">
+                                            <StackPanel>
+                                                <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding capacity}"/>
+                                                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding manufacturer}"/>
+                                                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding speed}"/>
+                                                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding type}"/>
+                                                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding serial_number}"/>
+                                                <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding slot}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
                         <Label/>
-                        <TextBlock FontWeight="Bold" >Ilość wolnej pamięci RAM:</TextBlock>
-                        <TextBlock x:Name="Free_RAM" HorizontalAlignment="Center" ></TextBlock>
                         <Label/>
+                        <UniformGrid>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" >Ilość wolnej pamięci wirtualnej:</TextBlock>
+                                <TextBlock x:Name="Free_virtual" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                                <TextBlock FontWeight="Bold" >Ilość wolnej pamięci RAM:</TextBlock>
+                                <TextBlock x:Name="Free_RAM" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock FontWeight="Bold" >Ilość całkowitej pamięci wirtualnej:</TextBlock>
+                                <TextBlock x:Name="Virtual_all" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                                <TextBlock FontWeight="Bold" >Ilość wolnej stronnicowanej pamięci jądra Windows:</TextBlock>
+                                <TextBlock x:Name="Free_core_memory" HorizontalAlignment="Center" ></TextBlock>
+                                <Label/>
+                            </StackPanel>
+                        </UniformGrid>
                     </StackPanel>
-                    <StackPanel>
-                        <TextBlock FontWeight="Bold" >Ilość całkowitej pamięci wirtualnej:</TextBlock>
-                        <TextBlock x:Name="Virtual_all" HorizontalAlignment="Center" ></TextBlock>
-                        <Label/>
-                        <TextBlock FontWeight="Bold" >Ilość wolnej stronnicowanej pamięci jądra Windows:</TextBlock>
-                        <TextBlock x:Name="Free_core_memory" HorizontalAlignment="Center" ></TextBlock>
-                        <Label/>
-                    </StackPanel>
-                </UniformGrid>
+                </Border>
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
@@ -388,8 +398,8 @@
                 </Grid>
                 <Label/>
                 <StackPanel>
-                    <Border Style="{DynamicResource RamModuleBorderStyle}">
-                        <TextBlock Style="{StaticResource RamModuleTextStyle}" Text="Te testy mierzą średnie zużycie CPU i RAM pod obciążeniem(pełny) lub bez(szybki)"/>
+                    <Border Style="{DynamicResource BorderStyle}">
+                        <TextBlock Style="{StaticResource TextStyle}" Text="Te testy mierzą średnie zużycie CPU i RAM pod obciążeniem(pełny) lub bez(szybki)"/>
                     </Border>
                     <Label/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
