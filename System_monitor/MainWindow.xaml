@@ -5,7 +5,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="SystemMonitor.MainWindow"
         Title="System Monitor" Height="710" Width="650" Background="{DynamicResource BackgroundBrush}">
-    
+    <!--Themes.xaml import-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,47 +13,61 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
 
 
     <TabControl Background="{StaticResource BackgroundBrush}">
+        <!--Main section-->
         <TabItem  Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="Ogólnie">
             <StackPanel Margin="10">
                 <TextBlock Text="Total" FontSize="25" FontWeight="Bold"/>
 
+                <!--CPU-->
                 <StackPanel Orientation="Horizontal" Margin="5" >
+                    
                     <TextBlock Text="CPU:" FontSize="14" FontWeight="Bold" />
                     <Label Width="20"></Label>
                     <ProgressBar x:Name="CPU_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}" />
                     <TextBlock x:Name="CPU_usagetext" Width="50" Text="0%" />
+                    
                 </StackPanel>
 
+                <!--GPU-->
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    
                     <TextBlock Text="Użycie karty graficznej: " FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
                     <ProgressBar x:Name="GPU_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
                     <TextBlock x:Name="GPU_usagetext"  Text="0%" />
+                    
                 </StackPanel>
 
+                <!--RAM-->
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    
                     <TextBlock Text="Użycie Pamięi RAM:" FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
                     <ProgressBar x:Name="RAM_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
                     <TextBlock x:Name="RAM_usagetext" Width="50" Text="0%" />
+                    
                 </StackPanel>
 
+                <!--Disk-->
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    
                     <TextBlock Text="Użycie dysku: " FontSize="14" FontWeight="Bold" />
                     <Label Width="20"/>
                     <ProgressBar x:Name="Disk_progress" Width="200" Height="15" Minimum="0" Maximum="100" Background="#42387B" BorderBrush="#1D2131" BorderThickness="2px" Foreground="{StaticResource Progress_color}"/>
                     <TextBlock x:Name="Disk_usagetext" Width="50" Text="0%" />
+                    
                 </StackPanel>
 
+                <!--Internet-->
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    
                     <TextBlock Text="Użycie sieci: " FontSize="14" FontWeight="Bold" />
                     <TextBlock Text="" FontSize="14" FontWeight="Bold" x:Name="typ_sieci" />
-                    <Label Width="20"/>                                                         <!-- tu dokończyć chce zrobić
-                    odbierane i wysyłane, robiłem jakiś wykres ale trzebabybyło tu się z tym pobawić(zrób coś tu)-->
+                    <Label Width="20"/>
                     <StackPanel>
                         <TextBlock x:Name="web_sendedtext" Text="0" HorizontalAlignment="Center" />
                         <TextBlock >Wysyłane pakiety</TextBlock>
@@ -63,9 +77,10 @@
                         <TextBlock x:Name="web_recivedtext" Text="0" HorizontalAlignment="Center" />
                         <TextBlock >Odbierane pakiety</TextBlock>
                     </StackPanel>
-                    
+
                 </StackPanel>
                 <Label/>
+                <!--Charts-->
                 <StackPanel x:Name="charts1"></StackPanel>
                 <Label/>
                 <Grid>
@@ -78,19 +93,19 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+
+                    <!--Optymalization buttons-->
                     <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource DarkButtonStyle}" Click="DNS_Click">Optymalizacja cache DNS(internet)</Button>
                     <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource DarkButtonStyle}" Click="Deleting_Click">Usunięcie plików tymczasowych</Button>
                     <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource DarkButtonStyle}" Click="Trash_Click">Usunięcie plików z kosza</Button>
                     <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource DarkButtonStyle}" Click="TEMP_delete_Click">Czyszczenie folderu tymczasowego %TEMP%</Button>
                     <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource DarkButtonStyle}" Grid.ColumnSpan="2" Click="RAM_Click">Zwolnienie nieużywanej pamięci RAM</Button>
-                    
-                    
+
                 </Grid>
-
-
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
+        <!--CPU section-->
         <TabItem Style="{StaticResource DarkTabItemStyle}" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}" Header="CPU">
             <StackPanel>
                 <Border Style="{DynamicResource BorderStyle}">
@@ -104,6 +119,8 @@
                         <Label/>
                         <Label/>
                         <Label/>
+
+                        <!--Details about CPU-->
                         <UniformGrid Columns="2" Rows="1">
                             
                             <StackPanel>
@@ -137,6 +154,8 @@
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
+
+        <!--GPU-->
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="GPU" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
                 <Border Style="{DynamicResource BorderStyle}">
@@ -150,6 +169,8 @@
                         <Label/>
                         <Label/>
                         <Label/>
+
+                        <!--Details about GPU-->
                         <UniformGrid Columns="2">
                             <StackPanel>
                                 <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Wersja zainstalowanego sterownika:</TextBlock>
@@ -176,12 +197,14 @@
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
+
+        <!--RAM-->
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="RAM" Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
                 <Border Style="{DynamicResource BorderStyle}">
                     <StackPanel>
-                        <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły dotyczące pamięci RAM
-                        </TextBlock>
+                        <TextBlock FontWeight="Bold" FontSize="20" Style="{DynamicResource HeaderStyle}">Szczegóły dotyczące pamięci RAM</TextBlock>
+                        <!--Showing bones of RAM-->
                         <StackPanel Orientation="Horizontal" x:Name="kosci_pamieci" HorizontalAlignment="Center">
                             <ItemsControl ItemsSource="{Binding RamModules}">
 
@@ -194,6 +217,7 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Style="{DynamicResource RamModuleStyle}">
+                                            <!--Details about RAM bone-->
                                             <StackPanel>
                                                 <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="{Binding capacity}"/>
                                                 <TextBlock HorizontalAlignment="Center" Style="{DynamicResource TextStyle}" Text="{Binding manufacturer}"/>
@@ -209,21 +233,23 @@
                         </StackPanel>
                         <Label/>
                         <Label/>
+
+                        <!--Details about RAM-->
                         <UniformGrid>
                             <StackPanel>
-                                <TextBlock FontWeight="Bold" >Ilość wolnej pamięci wirtualnej:</TextBlock>
-                                <TextBlock x:Name="Free_virtual" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Ilość wolnej pamięci wirtualnej:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="Free_virtual" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
-                                <TextBlock FontWeight="Bold" >Ilość wolnej pamięci RAM:</TextBlock>
-                                <TextBlock x:Name="Free_RAM" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Ilość wolnej pamięci RAM:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="Free_RAM" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock FontWeight="Bold" >Ilość całkowitej pamięci wirtualnej:</TextBlock>
-                                <TextBlock x:Name="Virtual_all" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Ilość całkowitej pamięci wirtualnej:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="Virtual_all" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
-                                <TextBlock FontWeight="Bold" >Ilość wolnej stronnicowanej pamięci jądra Windows:</TextBlock>
-                                <TextBlock x:Name="Free_core_memory" HorizontalAlignment="Center" ></TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" FontWeight="Bold" >Wolna stronnicowana pamięć jądra Windows:</TextBlock>
+                                <TextBlock Style="{DynamicResource TextStyle}" x:Name="Free_core_memory" HorizontalAlignment="Center" ></TextBlock>
                                 <Label/>
                             </StackPanel>
                         </UniformGrid>
@@ -232,185 +258,203 @@
             </StackPanel>
         </TabItem>
         <TabItem Width="5" Visibility="Hidden"></TabItem>
+        <!--Effectivity points-->
         <TabItem Style="{StaticResource DarkTabItemStyle}" Header="Punkty wyd." Background="#42387B" BorderBrush="#42387B" Foreground="{StaticResource TextBrush}">
             <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="20" >Szczegóły punktów wydajnościowych</TextBlock>
-                <Label Height="40"/>
-                <Grid>         
-                    
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <StackPanel Grid.Column="0" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_cpu"
-                        Background="#42387B" 
-                        BorderBrush="#1D2131" 
-                        BorderThickness="2px" 
-                        Foreground="{StaticResource Progress_color}"
-                        Minimum="0"
-                        Maximum="18"
-                        Value="50"
-                        Width="30"
-                        Height="200"
-                        Orientation="Vertical"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        RenderTransformOrigin="0.5,0.5">
-                        <ProgressBar.RenderTransform>
-                            <RotateTransform Angle="360"/>
-                        </ProgressBar.RenderTransform>
-                        
-                        </ProgressBar>
-                        <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="CPU" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="CPU_points_text" FontSize="15" FontWeight="Bold"/>                        
-                    </StackPanel>
+                <Border Style="{DynamicResource BorderStyle}">
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" FontSize="20" Style="{DynamicResource HeaderStyle}">Szczegóły punktów wydajnościowych</TextBlock>
+                        <Label Height="40"/>
+                        <Grid>
 
-                    <StackPanel Grid.Column="1" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_gpu"
-                            Background="#42387B" 
-                            BorderBrush="#1D2131" 
-                            BorderThickness="2px" 
-                            Foreground="{StaticResource Progress_color}"
-                            Minimum="0"
-                            Maximum="18"
-                            Value="50"
-                            Width="30"
-                            Height="200"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5">
-                            <ProgressBar.RenderTransform>
-                                <RotateTransform Angle="360"/>
-                            </ProgressBar.RenderTransform>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                        </ProgressBar>
-                        <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="GPU" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="GPU_points_text" FontSize="15" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="2" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_ram"
-                            Background="#42387B" 
-                            BorderBrush="#1D2131" 
-                            BorderThickness="2px" 
-                            Foreground="{StaticResource Progress_color}"
-                            Minimum="0"
-                            Maximum="18"
-                            Value="50"
-                            Width="30"
-                            Height="200"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5">
-                            <ProgressBar.RenderTransform>
-                                <RotateTransform Angle="360"/>
-                            </ProgressBar.RenderTransform>
+                            <!--CPU points-->
+                            <StackPanel Grid.Column="0" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_cpu"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="50"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
 
-                        </ProgressBar>
-                        <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="RAM" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="RAM_points_text" FontSize="15" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="3" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_disk"
-                            Background="#42387B" 
-                            BorderBrush="#1D2131" 
-                            BorderThickness="2px" 
-                            Foreground="{StaticResource Progress_color}"
-                            Minimum="0"
-                            Maximum="18"
-                            Value="50"
-                            Width="30"
-                            Height="200"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5">
-                            <ProgressBar.RenderTransform>
-                                <RotateTransform Angle="360"/>
-                            </ProgressBar.RenderTransform>
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="CPU" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="CPU_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
 
-                        </ProgressBar>
-                        <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="Disk" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="Disk_points_text" FontSize="15" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="4" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_temp"
-                            Background="#42387B" 
-                            BorderBrush="#1D2131" 
-                            BorderThickness="2px" 
-                            Foreground="{StaticResource Progress_color}"
-                            Minimum="0"
-                            Maximum="18"
-                            Value="50"
-                            Width="30"
-                            Height="200"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5">
-                            <ProgressBar.RenderTransform>
-                                <RotateTransform Angle="360"/>
-                            </ProgressBar.RenderTransform>
+                            <!--GPU points-->
+                            <StackPanel Grid.Column="1" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_gpu"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="50"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
 
-                        </ProgressBar>
-                        <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="Temp GPU" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="temp_points_text" FontSize="15" FontWeight="Bold"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="5" Grid.Row="0">
-                        <ProgressBar x:Name="VerticalProgress_process"
-                            Background="#42387B" 
-                            BorderBrush="#1D2131" 
-                            BorderThickness="2px" 
-                            Foreground="{StaticResource Progress_color}"
-                            Minimum="0"
-                            Maximum="18"
-                            Value="30"
-                            Width="30"
-                            Height="200"
-                            Orientation="Vertical"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            RenderTransformOrigin="0.5,0.5">
-                            <ProgressBar.RenderTransform>
-                                <RotateTransform Angle="360"/>
-                            </ProgressBar.RenderTransform>
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="GPU" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="GPU_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
 
-                        </ProgressBar>
+                            <!--RAM points-->
+                            <StackPanel Grid.Column="2" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_ram"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="50"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
+
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="RAM" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="RAM_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!--Disk points-->
+                            <StackPanel Grid.Column="3" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_disk"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="50"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
+
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="Disk" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="Disk_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!--Temp points-->
+                            <StackPanel Grid.Column="4" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_temp"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="50"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
+
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="Temp GPU" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="temp_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <!--Processes points-->
+                            <StackPanel Grid.Column="5" Grid.Row="0">
+                                <ProgressBar x:Name="VerticalProgress_process"
+                                    Background="#42387B" 
+                                    BorderBrush="#1D2115" 
+                                    BorderThickness="2px" 
+                                    Foreground="{StaticResource Progress_color}"
+                                    Minimum="0"
+                                    Maximum="18"
+                                    Value="30"
+                                    Width="30"
+                                    Height="200"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    RenderTransformOrigin="0.5,0.5">
+                                    <ProgressBar.RenderTransform>
+                                        <RotateTransform Angle="360"/>
+                                    </ProgressBar.RenderTransform>
+
+                                </ProgressBar>
+                                <Label/>
+                                <TextBlock HorizontalAlignment="Center" Text="Processes" FontSize="15" FontWeight="Bold"/>
+                                <TextBlock HorizontalAlignment="Center" x:Name="Processes_points_text" FontSize="15" FontWeight="Bold"/>
+                            </StackPanel>
+                        </Grid>
                         <Label/>
-                        <TextBlock HorizontalAlignment="Center" Text="Processes" FontSize="15" FontWeight="Bold"/>
-                        <TextBlock HorizontalAlignment="Center" x:Name="Processes_points_text" FontSize="15" FontWeight="Bold"/>
+
+                        <!--Tests-->
+                        <StackPanel>
+                            <Border Style="{DynamicResource RamModuleStyle}">
+                                <TextBlock Style="{StaticResource InfoTextStyle}" Text="Te testy mierzą średnie zużycie CPU i RAM pod obciążeniem(pełny) lub bez(szybki)"/>
+                            </Border>
+                            <Label/>
+                            <Label/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Style="{StaticResource DarkButtonStyle}" Click="Easy_benchmark_click">Szybki test wydajności</Button>
+                                <Label Width="50"/>
+                                <Button Style="{StaticResource DarkButtonStyle}" Click="Hard_benchmark_click">Pełny test wydajności</Button>
+                            </StackPanel>
+                            <Label/>
+                            <Label/>
+                        </StackPanel>
                     </StackPanel>
-                </Grid>
-                <Label/>
-                <StackPanel>
-                    <Border Style="{DynamicResource BorderStyle}">
-                        <TextBlock Style="{StaticResource TextStyle}" Text="Te testy mierzą średnie zużycie CPU i RAM pod obciążeniem(pełny) lub bez(szybki)"/>
-                    </Border>
-                    <Label/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Style="{StaticResource DarkButtonStyle}" Click="Easy_benchmark_click">Szybki test wydajności</Button>
-                        <Label Width="50"/>
-                        <Button Style="{StaticResource DarkButtonStyle}" Click="Hard_benchmark_click">Pełny test wydajności</Button>
-                    </StackPanel>
-                </StackPanel>
+                </Border>
             </StackPanel>
         </TabItem>
     </TabControl>
-
-
 </Window>

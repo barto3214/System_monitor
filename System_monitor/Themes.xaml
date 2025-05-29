@@ -175,6 +175,16 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>
 
+    <!--Styl dla tekstów informacyjnych-->
+    <Style x:Key="InfoTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
     <!-- Styl dla nagłówka modułu -->
     <Style x:Key="HeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource TextStyle}">
         <Setter Property="FontSize" Value="20"/>
