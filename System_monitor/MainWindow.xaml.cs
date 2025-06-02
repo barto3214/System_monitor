@@ -12,14 +12,13 @@ using System.Collections.ObjectModel;
 using System_monitor;
 using LiveCharts;
 using LiveCharts.Wpf;
-using System.Threading.Tasks;
 
 namespace SystemMonitor
 {
     public partial class MainWindow : Window
     {
         public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
-        public int basic_speed{ set; get; }
+        public int basic_speed { set; get; }
         private PerformanceCounter _cpuCounter;
         private PerformanceCounter _cputhreads;
         private PerformanceCounter _cpuprocess;
@@ -72,16 +71,16 @@ namespace SystemMonitor
                 Height = 300,
                 LegendLocation = LegendLocation.Top,
                 Series = new SeriesCollection { lineSeries }
-                
+
             };
             chart1.AxisX.Add(new Axis
-            {   
+            {
                 Title = "Czas",
                 Separator = new LiveCharts.Wpf.Separator
                 {
                     Step = 1,
                     IsEnabled = false
-                    
+
                 }
 
             });
@@ -169,7 +168,8 @@ namespace SystemMonitor
             charts3.Children.Add(chart3);
 
         }
-        private void SetObjects() {
+        private void SetObjects()
+        {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT DeviceLocator, Capacity, Manufacturer, SerialNumber, Speed, MemoryType FROM Win32_PhysicalMemory");
             foreach (ManagementObject obj in searcher.Get())
             {
@@ -178,20 +178,20 @@ namespace SystemMonitor
                     obj["Manufacturer"]?.ToString() ?? "Nieznane",
                     obj["DeviceLocator"]?.ToString() ?? "Nieznane",
                     obj["SerialNumber"]?.ToString() ?? "Nieznane",
-                    obj["Speed"] != null ? $"{obj["Speed"]} MHz": "Nieznane",
+                    obj["Speed"] != null ? $"{obj["Speed"]} MHz" : "Nieznane",
                     GetMemoryType(Convert.ToUInt16(obj["MemoryType"]))));
             }
-            
+
         }
         private void InitializePerformanceCounters()
         {
             _cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            _cputime = new PerformanceCounter("System", "System Up Time");                                  
+            _cputime = new PerformanceCounter("System", "System Up Time");
             _cputhreads = new PerformanceCounter("System", "Threads");
             _cpuprocess = new PerformanceCounter("System", "Processes");
             _cpuinterr = new PerformanceCounter("Processor", "Interrupts/sec", "_Total");
             _ramCounter = new PerformanceCounter("Memory", "Available MBytes");
-            _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");                 
+            _diskCounter = new PerformanceCounter("PhysicalDisk", "% Disk time", "_Total");
             _pagedPoolCounter = new PerformanceCounter("Memory", "Pool Paged Bytes");
             _howmuchjumpsCPU = new PerformanceCounter("System", "Context Switches/sec");
             _totalMemory = GetTotalMemory();
@@ -214,7 +214,7 @@ namespace SystemMonitor
             _pagedPoolCounter.NextValue();
             _howmuchjumpsCPU.NextValue();
 
-        }   
+        }
         public void UpdatePerformanceData(object sender, EventArgs e)
         {
             //variables with performance counters
@@ -230,8 +230,8 @@ namespace SystemMonitor
             //RAM usage
             float availableMemoryInMb = _ramCounter.NextValue();
             float usedMemoryInMb = _totalMemory - availableMemoryInMb;
-            float ramUsagePercentage = (usedMemoryInMb / _totalMemory) * 100;  
-            
+            float ramUsagePercentage = usedMemoryInMb / _totalMemory * 100;
+
 
             //points     
             int RAM_points = performance_counter_points(ramUsagePercentage);
@@ -256,8 +256,8 @@ namespace SystemMonitor
 
             //adding points to chart1
             int average_points = Math.Abs(RAM_points + CPU_points + Disk_points + processes_points + GPU_temp_points + GPU_usage_points) / 6;
-            values.Add((average_points * 100) / 18);
-            
+            values.Add(average_points * 100 / 18);
+
 
             TimeSpan uptime = TimeSpan.FromSeconds(cputime);
             time_cpu.Text = $"{uptime.Hours}h {uptime.Minutes}m {uptime.Seconds}s";
@@ -267,7 +267,7 @@ namespace SystemMonitor
 
             TimeSpan uptime2 = TimeSpan.FromSeconds(cputime);
             time_cpu.Text = $"{uptime2.Hours}h {uptime2.Minutes}m {uptime2.Seconds}s";
-            
+
             //adding points to chart3
             values3.Add(GetGPUInfo().Item3);
 
@@ -275,7 +275,7 @@ namespace SystemMonitor
             time_cpu.Text = $"{uptime3.Hours}h {uptime3.Minutes}m {uptime3.Seconds}s";
 
             //variables for text 
-            pagedPool = pagedPool / (1024 * 1024 * 1024);
+            pagedPool /= 1024 * 1024 * 1024;
             int procenty_cpu = (int)cpuUsage;
             CPU_usagetext.Text = $"{procenty_cpu}%";
             usage_proc.Text = $"{procenty_cpu}%";
@@ -300,7 +300,7 @@ namespace SystemMonitor
             Disk_progress.Value = diskUsage;
 
             VerticalProgress_cpu.Value = CPU_points;
-            VerticalProgress_ram.Value =  RAM_points;
+            VerticalProgress_ram.Value = RAM_points;
             VerticalProgress_disk.Value = Disk_points;
             VerticalProgress_process.Value = processes_points;
             VerticalProgress_temp.Value = GPU_temp_points;
@@ -312,7 +312,8 @@ namespace SystemMonitor
             GetCPUInfo();
             GetMemoryInfo();
 
-            if (values.Count > 11){
+            if (values.Count > 11)
+            {
                 values.RemoveAt(0);
             }
 
@@ -373,16 +374,16 @@ namespace SystemMonitor
                 Free_virtual.Text = obj["FreeVirtualMemory"] != null ?
                     $"{Convert.ToUInt64(obj["FreeVirtualMemory"]) / 1024} MB" : "Nieznane";
 
-                Virtual_all.Text = obj.Properties["TotalVirtualMemorySize"] != null ?                
+                Virtual_all.Text = obj.Properties["TotalVirtualMemorySize"] != null ?
                     $"{Convert.ToUInt64(obj["TotalVirtualMemorySize"]) / 1024} MB" : "Nieznane";
 
 
             }
-            
+
         }
         private string GetMemoryType(ushort type)
         {
-            
+
             return type switch
             {
                 20 => "DDR",
@@ -423,13 +424,13 @@ namespace SystemMonitor
             {
                 foreach (ManagementObject obj in searcher.Get())
                 {
-                    GPU_name.Text = "" + obj["Name"] ;
+                    GPU_name.Text = "" + obj["Name"];
                     GPU_status.Text = obj["Status"]?.ToString();
                     GPU_driver_version.Text = obj["DriverVersion"]?.ToString();
                 }
             }
         }
-        public Tuple<int, int,int> GetGPUInfo()
+        public Tuple<int, int, int> GetGPUInfo()
         {
             int GPU_usage_points = 0;
             int GPU_temp_points = 0;
@@ -456,7 +457,8 @@ namespace SystemMonitor
                         for (int i = 5; i < 10; i++)
                         {
                             GPU_temp.Text = $"{sensor.CurrentTemperature} °C";
-                            if (sensor.CurrentTemperature > 20 && sensor.CurrentTemperature < 65) {
+                            if (sensor.CurrentTemperature > 20 && sensor.CurrentTemperature < 65)
+                            {
                                 GPU_temp_points = 6;
                             }
                             else if (sensor.CurrentTemperature >= 65 && sensor.CurrentTemperature < 85)
@@ -474,7 +476,7 @@ namespace SystemMonitor
                 }
             }
 
-            return Tuple.Create(GPU_usage_points, GPU_temp_points,GPU_usage_to_go);
+            return Tuple.Create(GPU_usage_points, GPU_temp_points, GPU_usage_to_go);
         }
         private async void UpdateNetworkStats(object sender, EventArgs e)
         {
@@ -602,7 +604,8 @@ namespace SystemMonitor
             await Task.Run(() => Trash_click());
         }
 
-        private async void Trash_click() {
+        private async void Trash_click()
+        {
             [DllImport("shell32.dll")]
             static extern int SHEmptyRecycleBin(IntPtr hwnd, string pszRootPath, uint dwFlags);
 
@@ -742,7 +745,8 @@ namespace SystemMonitor
             await RunEasyBenchmarkAsync();
         }
 
-        private async Task RunEasyBenchmarkAsync() {
+        private async Task RunEasyBenchmarkAsync()
+        {
             await Task.Delay(1000);
             float cpu = _cpuCounter.NextValue();
             float ram = _ramCounter.NextValue();
@@ -755,7 +759,7 @@ namespace SystemMonitor
                    $"Wolna Pamięć: {ram:F2} MB\n" +
                    $"Całkowita Pamięć: {total_memory:F2} MB";
 
-            MessageBox.Show(result,"Test wydajności zakończony");
+            MessageBox.Show(result, "Test wydajności zakończony");
         }
 
         public async void Hard_benchmark_click(object sender, RoutedEventArgs e)
@@ -764,15 +768,16 @@ namespace SystemMonitor
             MessageBox.Show("Aplikacja celowo maksymalnie obciąża procesor i pamięć RAM, by sprawdzić," +
                 " jak Twój komputer radzi sobie pod dużym naciskiem.\r\nPodczas testu komputer może się lekko zawiesić" +
                 " – to normalne.\r\nPo zakończeniu zobaczysz średnie zużycie CPU, RAM oraz ilość dostępnej pamięci.");
-            await RunFullBenchmarkAsync(10);                      
+            await RunFullBenchmarkAsync(10);
         }
 
-        private async Task RunFullBenchmarkAsync(int seconds = 10) {
+        private async Task RunFullBenchmarkAsync(int seconds = 10)
+        {
             var cpumonitor = monitor_cpu_during_test(seconds);
             var cpuTask = Task.Run(() => CPU_stress_test(seconds));
             var ramTask = Task.Run(() => RAM_stress_test(seconds));
 
-            await Task.WhenAll(cpuTask, ramTask,cpumonitor);
+            await Task.WhenAll(cpuTask, ramTask, cpumonitor);
             float cpu = await cpumonitor;
             float ram = _ramCounter.NextValue();
             float total_memory = _totalMemory;
@@ -784,10 +789,11 @@ namespace SystemMonitor
                     $"Wolna Pamięć: {ram:F2} MB\n" +
                     $"Całkowita Pamięć: {total_memory:F2} MB";
 
-            MessageBox.Show(result,"Test wydajności zakończony");
+            MessageBox.Show(result, "Test wydajności zakończony");
         }
 
-        private void CPU_stress_test(int seconds) {
+        private void CPU_stress_test(int seconds)
+        {
             List<Task> threads = new();
             for (int i = 0; i < Environment.ProcessorCount; i++)
             {
@@ -802,22 +808,23 @@ namespace SystemMonitor
             }
             Task.WaitAll(threads.ToArray());
         }
-        private void RAM_stress_test(int seconds) {
+        private void RAM_stress_test(int seconds)
+        {
             List<byte[]> buffers = new List<byte[]>();
             var sw = System.Diagnostics.Stopwatch.StartNew();
 
             while (sw.Elapsed.TotalSeconds < seconds)
             {
-                
+
                 byte[] buffer = new byte[10 * 1024 * 1024];
 
-                
+
                 for (int i = 0; i < buffer.Length; i++)
                 {
                     buffer[i] = (byte)(i % 256);
                 }
 
-                
+
                 long sum = 0;
                 for (int i = 0; i < buffer.Length; i++)
                 {
@@ -826,18 +833,19 @@ namespace SystemMonitor
 
                 buffers.Add(buffer);
 
-               
+
                 if (buffers.Count > 10)
                 {
                     buffers.RemoveAt(0);
                 }
 
-                
+
                 Thread.Sleep(500);
             }
         }
 
-        private async Task<float> monitor_cpu_during_test(int seconds) {
+        private async Task<float> monitor_cpu_during_test(int seconds)
+        {
             List<float> cpuusages = new();
             for (int i = 0; i < seconds; i++)
             {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace System_monitor
+﻿namespace System_monitor
 {
-    public class Kosc_ram{
+    public class Kosc_ram
+    {
         public string capacity { get; set; }
         public string manufacturer { get; set; }
         public string slot { get; set; }
