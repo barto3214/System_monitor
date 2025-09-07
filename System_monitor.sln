@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35728.132 d17.12
+VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System_monitor", "System_monitor\System_monitor.csproj", "{B50F3A9F-6E26-4131-9A1F-93D04986437C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "system_monitor_tests", "system_monitor_tests\system_monitor_tests.csproj", "{48232B84-5247-499B-865C-E99FDA3D853D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{B50F3A9F-6E26-4131-9A1F-93D04986437C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B50F3A9F-6E26-4131-9A1F-93D04986437C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B50F3A9F-6E26-4131-9A1F-93D04986437C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48232B84-5247-499B-865C-E99FDA3D853D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48232B84-5247-499B-865C-E99FDA3D853D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48232B84-5247-499B-865C-E99FDA3D853D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48232B84-5247-499B-865C-E99FDA3D853D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA973A07-B605-49EE-A7DA-42A0361D9143}
 	EndGlobalSection
 EndGlobal

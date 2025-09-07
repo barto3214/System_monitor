@@ -16,7 +16,8 @@ using LiveCharts.Wpf;
 namespace SystemMonitor
 {
     public partial class MainWindow : Window
-    {
+    {   
+        
         public ObservableCollection<Kosc_ram> RamModules { get; set; } = new ObservableCollection<Kosc_ram>();
         public int basic_speed { set; get; }
         private PerformanceCounter _cpuCounter;
@@ -329,7 +330,7 @@ namespace SystemMonitor
 
         }
 
-        private int performance_counter_points(float usage_to_parse)
+        public static int performance_counter_points(float usage_to_parse)
         {
             if (usage_to_parse > 0 && usage_to_parse <= 34)
             {
@@ -381,7 +382,7 @@ namespace SystemMonitor
             }
 
         }
-        private string GetMemoryType(ushort type)
+        public static string GetMemoryType(ushort type)
         {
 
             return type switch

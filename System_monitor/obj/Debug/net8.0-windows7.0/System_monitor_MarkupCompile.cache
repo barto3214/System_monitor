@@ -8,12 +8,12 @@ C:\Users\barte\source\repos\probna\System_monitor\System_monitor\obj\Debug\net8.
 System_monitor
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\barte\source\repos\probna\System_monitor\System_monitor\App.xaml
 2-1938809184
 1699806635
 5-739150172
-210-215827614
+210-1603465796
 MainWindow.xaml;Themes.xaml;
 
 False

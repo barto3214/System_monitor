@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TkET4ctK4hY=",
+  "dgSpecHash": "3nvK7t2yrRE=",
   "success": true,
   "projectFilePath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
   "expectedPackageFiles": [
@@ -45,8 +45,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Pakiet „LiveCharts 0.9.7” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0-windows7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "projectPath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
       "libraryId": "LiveCharts",
       "targetGraphs": [
         "net8.0-windows7.0"
@@ -55,8 +57,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Pakiet „LiveCharts.Wpf 0.9.7” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0-windows7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "projectPath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
       "libraryId": "LiveCharts.Wpf",
       "targetGraphs": [
         "net8.0-windows7.0"
@@ -65,8 +69,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Pakiet „OpenHardwareMonitor 0.9.6” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1” zamiast platformy docelowej projektu „net8.0-windows7.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
+      "projectPath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\barte\\source\\repos\\probna\\System_monitor\\System_monitor\\System_monitor.csproj",
       "libraryId": "OpenHardwareMonitor",
       "targetGraphs": [
         "net8.0-windows7.0"
